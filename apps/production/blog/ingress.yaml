@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blog
+  namespace: default
+  annotations:
+    cert-manager.io/issuer: "local-siemons-it-nl"
+spec:
+  rules:
+    - host: blog.local.siemons-it.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: blog
+                port:
+                  number: 80

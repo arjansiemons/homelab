@@ -13,4 +13,4 @@ This repository contains the Kubernetes configuration for my homelab environment
 
 ## Secrets Management
 
-Secrets are managed via Azure KeyVault using the CSI Secrets Store Driver, instead of Sealed Secrets.
+Secrets are managed via Azure KeyVault using the CSI Secrets Store Driver.

@@ -12,7 +12,7 @@ spec:
     kind: GitRepository
     name: homelab-private
   dependsOn:
-    - name: infrastructure  # Zorg ervoor dat infrastructuur eerst wordt toegepast
+    - name: infrastructure
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
@@ -24,5 +24,5 @@ spec:
   ref:
     branch: main
   secretRef:
-    name: flux-system  # Hergebruik dezelfde SSH-sleutel
+    name: flux-system
   url: ssh://git@github.com/arjansiemons/homelab-private

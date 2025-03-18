@@ -11,6 +11,6 @@ spec:
   timeout: 5m
   sourceRef:
     kind: GitRepository
-    name: homelab
+    name: flux-system
   path: ./apps/production
   prune: true

@@ -1,0 +1,13 @@
+proxmox = {
+  name         = "pve"
+  cluster_name = "homelab"
+  endpoint     = "https://pve:8006"
+  insecure     = false
+  username     = "root"
+  api_token    = "API_TOKEN_STORED_IN_KEYVAULT"  # This value is fetched from KeyVault
+}
+
+azure_keyvault = {
+  name           = "your-keyvault-name"
+  resource_group = "your-resource-group"
+}

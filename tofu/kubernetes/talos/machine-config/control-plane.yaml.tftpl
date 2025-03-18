@@ -1,0 +1,34 @@
+machine:
+  network:
+    hostname: ${hostname}
+    interfaces:
+      - interface: eth0
+        dhcp: true
+        vip:
+          ip: ${node_vip}
+  nodeLabels:
+    topology.kubernetes.io/region: ${cluster_name}
+    topology.kubernetes.io/zone: ${node_name}
+
+cluster:
+  allowSchedulingOnControlPlanes: false
+  network:
+    cni:
+      name: none
+  proxy:
+    disabled: true
+  inlineManifests:
+  - name: cilium-values
+    contents: |
+      ---
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: cilium-values
+        namespace: kube-system
+      data:
+        values.yaml: |-
+          ${indent(10, cilium_values)}
+  - name: cilium-bootstrap
+    contents: |
+      ${indent(6, cilium_install)}

@@ -1,0 +1,21 @@
+# Terraform/OpenTofu state files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Variables with secrets
+terraform.tfvars
+*.auto.tfvars
+!*.auto.tfvars.sample
+!terraform.tfvars.sample
+
+# Local .terraform directories
+**/.terraform/*
+
+# Crash log files
+crash.log
+
+# Certificates and keys
+*.key
+*.cert

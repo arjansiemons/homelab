@@ -1,0 +1,28 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: private-apps
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./clusters/production/apps
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab-private
+  dependsOn:
+    - name: infrastructure  # Zorg ervoor dat infrastructuur eerst wordt toegepast
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: homelab-private
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: flux-system  # Hergebruik dezelfde SSH-sleutel
+  url: ssh://git@github.com/arjansiemons/homelab-private

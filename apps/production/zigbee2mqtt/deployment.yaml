@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt
+  namespace: default
+  labels:
+    app: zigbee2mqtt
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      containers:
+        - name: zigbee2mqtt
+          image: koenkk/zigbee2mqtt:2.1.1
+          resources:
+            requests:
+              cpu: 500m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: /app/data
+              name: zigbee2mqtt-data
+            - name: zigbee2mqtt-udev
+              mountPath: /run/udev
+            - name: ttyusb
+              mountPath: /dev/ttyUSB0
+          securityContext:
+            privileged: true
+            # Opmerking: We kunnen geen verdere securityContext toevoegen omdat privileged: true
+            # conflicteert met allowPrivilegeEscalation: false en andere beperkingen
+          env:
+            - name: TZ
+              value: Europe/Amsterdam
+      volumes:
+        - name: zigbee2mqtt-data
+          persistentVolumeClaim:
+            claimName: zigbee2mqtt-claim
+        - name: zigbee2mqtt-udev
+          hostPath:
+            path: /run/udev
+        - name: ttyusb
+          hostPath:
+            path: /dev/ttyUSB0
+      nodeSelector:
+        zigbee: "true"

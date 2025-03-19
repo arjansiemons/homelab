@@ -1,0 +1,24 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zigbee2mqtt-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/issuer: "local-siemons-it-nl"
+spec:
+  tls:
+    - hosts:
+        - zigbee2mqtt.local.siemons-it.nl
+      secretName: local-siemons-it-nl-tls
+  rules:
+    - host: zigbee2mqtt.local.siemons-it.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: zigbee2mqtt
+                port:
+                  number: 8000

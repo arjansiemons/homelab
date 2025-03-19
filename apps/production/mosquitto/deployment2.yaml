@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto-b
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+        type: bridge
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - mosquitto
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - args:
+        - -c
+        - /mosquitto/config/mosquitto.conf
+        command:
+        - mosquitto
+        image: eclipse-mosquitto:2.0.21
+        name: mosquitto
+        ports:
+        - containerPort: 1883
+        - containerPort: 9001
+        volumeMounts:
+        - mountPath: /mosquitto/config
+          name: config
+        securityContext:
+          runAsUser: 1883
+          runAsGroup: 1883
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          seccompProfile:
+            type: RuntimeDefault
+      securityContext:
+        runAsNonRoot: true
+      volumes:
+      - configMap:
+          name: bridge-conf
+        name: config

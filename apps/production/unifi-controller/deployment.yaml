@@ -34,7 +34,6 @@ spec:
             capabilities:
               drop:
                 - ALL
-            readOnlyRootFilesystem: true
           ports:
             - name: device-comm
               containerPort: 8080

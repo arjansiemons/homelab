@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - helm-repository.yaml
+  - repositories.yaml
+  - deployment-crds.yaml
   - release.yaml

@@ -6,7 +6,12 @@ metadata:
   labels:
     app.kubernetes.io/instance: unifi-controller
     app.kubernetes.io/name: unifi-controller
+  annotations:
+    service.cilium.io/global: "true"
+    service.cilium.io/shared: "true"
 spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.2.65
   ports:
     - name: device-comm
       port: 8080

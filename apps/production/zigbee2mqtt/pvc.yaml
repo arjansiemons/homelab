@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: zigbee2mqtt-claim
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: proxmox-csi
+  volumeName: pvc-1c5a3498-3ef4-4e44-895a-a42a6570b8f0
+  resources:
+    requests:
+      storage: 1Gi

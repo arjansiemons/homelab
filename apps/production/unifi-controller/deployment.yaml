@@ -20,7 +20,7 @@ spec:
     spec:
       securityContext:
         fsGroup: 999
-        fsUser: 999
+        runAsUser: 999
         seccompProfile:
           type: RuntimeDefault
       containers:

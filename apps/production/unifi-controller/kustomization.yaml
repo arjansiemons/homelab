@@ -1,0 +1,27 @@
+kind: Kustomization
+namespace: unifi
+resources:
+  - pvc.yaml
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+images:
+  - name: ghcr.io/goofball222/unifi
+    newTag: latest-beta
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/routes/0/match
+        value: Host(`unifi.local.siemons-it.nl`)
+    target:
+      kind: IngressRoute
+  - patch: |-
+      - op: replace
+        path: /spec/resources/requests/storage
+        value: 1Gi
+    target:
+      kind: PersistentVolumeClaim
+labels:
+  - pairs:
+      app.kubernetes.io/instance: unifi-controller
+      app.kubernetes.io/name: unifi-controller

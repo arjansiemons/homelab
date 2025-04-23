@@ -1,0 +1,13 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mealie-api-data
+  namespace: default
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: "proxmox-csi"
+  volumeName: pvc-955bf3e5-1dd6-4f60-8c9f-ceeb58dcd398

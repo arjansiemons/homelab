@@ -1,0 +1,25 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mealie-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/issuer: "local-siemons-it-nl"
+spec:
+  tls:
+    - hosts:
+        - mealie.local.siemons-it.nl
+      secretName: local-siemons-it-nl-tls
+  rules:
+    - host: mealie.local.siemons-it.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mealie
+                port:
+                  number: 9000
+

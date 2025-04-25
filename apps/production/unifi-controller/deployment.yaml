@@ -28,7 +28,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: unifi-controller
-          image: ghcr.io/goofball222/unifi:9.0.114
+          image: ghcr.io/goofball222/unifi:9.1.120
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false

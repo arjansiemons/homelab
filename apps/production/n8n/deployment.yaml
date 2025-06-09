@@ -52,7 +52,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: n8n-host
-                  key: N8N_HOST      
+                  key: N8N_HOST
+            - name: N8N_EDITOR_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: n8n-baseurl
+                  key: N8N_EDITOR_BASE_URL                
           envFrom:
             - configMapRef:
                 name: n8n-config

@@ -4,3 +4,5 @@ resources:
   - ingress.yaml
   - pvc.yaml
   - external-secret.yaml
+  - external-secret-cloudflared.yaml
+  - cloudflared.yaml

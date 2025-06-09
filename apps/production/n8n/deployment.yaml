@@ -21,28 +21,28 @@ spec:
         app: n8n
     spec:
       containers:
-        - env:
+        - name: n8n
+          image: n8nio/n8n:1.74.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3008
+              protocol: TCP
+          env:
             - name: DB_POSTGRESDB_USER
               valueFrom:
                 secretKeyRef:
                   key: DB_USER
-                  name: n8n-secret
+                  name: n8n-postgres-app
             - name: DB_POSTGRESDB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: DB_PASSWORD
-                  name: n8n-secret
+                  name: n8n-postgres-app
           envFrom:
             - configMapRef:
                 name: n8n-config
             - secretRef:
-                name: n8n-secret
-          image: n8nio/n8n:1.74.3
-          imagePullPolicy: IfNotPresent
-          name: n8n
-          ports:
-            - containerPort: 3008
-              protocol: TCP
+                name: n8n-postgres-app
           resources:
             limits:
               cpu: 500m
@@ -55,9 +55,6 @@ spec:
           volumeMounts:
             - mountPath: /home/node/.n8n
               name: n8n-data
-            - mountPath: /mnt/secrets-store
-              name: secrets-store
-              readOnly: true
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler

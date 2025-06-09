@@ -1,74 +1,73 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-annotations:
-name: n8n
-namespace: n8n
+  name: n8n
+  namespace: n8n
 spec:
-progressDeadlineSeconds: 600
-replicas: 1
-revisionHistoryLimit: 10
-selector:
-  matchLabels:
-    app: n8n
-strategy:
-  rollingUpdate:
-    maxSurge: 25%
-    maxUnavailable: 25%
-  type: RollingUpdate
-template:
-  metadata:
-    labels:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
       app: n8n
-  spec:
-    containers:
-    - env:
-      - name: DB_POSTGRESDB_USER
-        valueFrom:
-          secretKeyRef:
-            key: DB_USER
-            name: n8n-secret
-      - name: DB_POSTGRESDB_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            key: DB_PASSWORD
-            name: n8n-secret
-      envFrom:
-      - configMapRef:
-          name: n8n-config
-      - secretRef:
-          name: n8n-secret
-      image: n8nio/n8n:1.74.3
-      imagePullPolicy: IfNotPresent
-      name: n8n
-      ports:
-      - containerPort: 3008
-        protocol: TCP
-      resources:
-        limits:
-          cpu: 500m
-          memory: 1Gi
-        requests:
-          cpu: 250m
-          memory: 512Mi
-      terminationMessagePath: /dev/termination-log
-      terminationMessagePolicy: File
-      volumeMounts:
-      - mountPath: /home/node/.n8n
-        name: n8n-data
-      - mountPath: /mnt/secrets-store
-        name: secrets-store
-        readOnly: true
-    dnsPolicy: ClusterFirst
-    restartPolicy: Always
-    schedulerName: default-scheduler
-    securityContext:
-      fsGroup: 1000
-      runAsGroup: 1000
-      runAsUser: 1000
-    terminationGracePeriodSeconds: 30
-    volumes:
-    - name: n8n-data
-      persistentVolumeClaim:
-        claimName: n8n-data
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: n8n
+    spec:
+      containers:
+        - env:
+            - name: DB_POSTGRESDB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: DB_USER
+                  name: n8n-secret
+            - name: DB_POSTGRESDB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: DB_PASSWORD
+                  name: n8n-secret
+          envFrom:
+            - configMapRef:
+                name: n8n-config
+            - secretRef:
+                name: n8n-secret
+          image: n8nio/n8n:1.74.3
+          imagePullPolicy: IfNotPresent
+          name: n8n
+          ports:
+            - containerPort: 3008
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /home/node/.n8n
+              name: n8n-data
+            - mountPath: /mnt/secrets-store
+              name: secrets-store
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsUser: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: n8n-data
+          persistentVolumeClaim:
+            claimName: n8n-data
 

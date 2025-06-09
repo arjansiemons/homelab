@@ -6,4 +6,5 @@ resources:
   - external-secret.yaml
   - external-secret-cloudflared.yaml
   - external-secret-webhook.yaml
+  - external-secret-host.yaml
   - cloudflared.yaml

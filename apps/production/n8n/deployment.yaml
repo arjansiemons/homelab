@@ -48,6 +48,11 @@ spec:
                 secretKeyRef:
                   name: n8n-webhook-url
                   key: WEBHOOK_URL
+            - name: N8N_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: n8n-host
+                  key: N8N_HOST      
           envFrom:
             - configMapRef:
                 name: n8n-config

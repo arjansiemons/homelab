@@ -20,7 +20,6 @@ items:
       type: RollingUpdate
     template:
       metadata:
-        creationTimestamp: null
         labels:
           app: n8n
       spec:

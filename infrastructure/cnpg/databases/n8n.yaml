@@ -16,6 +16,3 @@ spec:
       owner: n8n
       secret:
         name: n8n-postgres-app
-        keys:
-          username: prod-n8n-db-user
-          password: prod-n8n-db-password

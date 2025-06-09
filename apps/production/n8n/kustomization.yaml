@@ -5,4 +5,5 @@ resources:
   - pvc.yaml
   - external-secret.yaml
   - external-secret-cloudflared.yaml
+  - external-secret-webhook.yaml
   - cloudflared.yaml

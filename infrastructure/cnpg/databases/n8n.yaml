@@ -9,11 +9,8 @@ spec:
   storage:
     size: 10Gi
     storageClass: proxmox-csi
-  superuserSecret:
-    name: n8n-postgres-superuser
   bootstrap:
     initdb:
       database: n8n
       owner: n8n
-      secret:
-        name: n8n-postgres-app
+

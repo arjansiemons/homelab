@@ -43,6 +43,11 @@ spec:
                 secretKeyRef:
                   key: DB_PASSWORD
                   name: n8n-postgres-app
+            - name: WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: n8n-webhook-url
+                  key: WEBHOOK_URL
           envFrom:
             - configMapRef:
                 name: n8n-config

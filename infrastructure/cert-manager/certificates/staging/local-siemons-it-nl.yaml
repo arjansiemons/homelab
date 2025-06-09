@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: local-siemons-it-nl
+  name: local-siemons-it-nl-staging
   namespace: default
 spec:
   secretName: local-siemons-it-nl-staging-tls

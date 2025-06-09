@@ -1,0 +1,15 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: local-siemons-it-nl
+  namespace: default
+spec:
+  secretName: local-siemons-it-nl-staging-tls
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  commonName: "*.local.siemons-it.nl"
+  dnsNames:
+  - "local.siemons-it.nl"
+  - "*.local.siemons-it.nl"

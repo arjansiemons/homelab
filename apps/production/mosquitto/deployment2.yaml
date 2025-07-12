@@ -29,7 +29,7 @@ spec:
         - /mosquitto/config/mosquitto.conf
         command:
         - mosquitto
-        image: eclipse-mosquitto:2.0.21
+        image: eclipse-mosquitto:2.0.22
         name: mosquitto
         ports:
         - containerPort: 1883

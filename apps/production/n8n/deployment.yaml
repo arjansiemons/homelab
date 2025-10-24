@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: n8n
-          image: n8nio/n8n:1.116.1
+          image: n8nio/n8n:1.117.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3008

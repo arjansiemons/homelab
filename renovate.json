@@ -9,8 +9,8 @@
       "**/infrastructure/**",
       "**/apps/**"
     ],
-    "fileMatch": [
-      "(^|/)[^/]*\\.ya?ml$"
+    "managerFilePatterns": [
+      "/(^|/)[^/]*\\.ya?ml$/"
     ],
     "packageRules": [
       {

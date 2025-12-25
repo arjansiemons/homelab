@@ -7,7 +7,7 @@ resources:
   - ingress.yaml
 images:
   - name: ghcr.io/goofball222/unifi
-    newTag: 10.0.160
+    newTag: 10.0.162
 patches:
   - patch: |-
       - op: replace

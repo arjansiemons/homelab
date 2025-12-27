@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-unifi-os
+  namespace: unifi-os
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    # Allow ingress from within namespace
+    - from:
+        - podSelector: {}
+    # Allow ingress from any source (for device adoption and web UI)
+    # In production, you may want to restrict this further
+    - from: []
+  egress:
+    # Allow all egress (for internet access, updates, and external services)
+    - to:
+        - namespaceSelector: {}
+    # Allow DNS
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+    # Allow all external traffic
+    - to:
+        - namespaceSelector: {}

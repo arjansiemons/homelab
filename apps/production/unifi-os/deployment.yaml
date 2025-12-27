@@ -18,6 +18,7 @@ spec:
       containers:
         - name: unifi-os-server
           image: ghcr.io/lemker/unifi-os-server:5.0.6
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 443
               name: webui

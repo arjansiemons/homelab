@@ -1,0 +1,17 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: unifi-os-test
+  namespace: flux-system
+spec:
+  interval: 1m
+  path: ./apps/production/unifi-os
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: homelab
+    branch: feature/unifi-os
+  dependsOn:
+    - name: infrastructure
+  # Set suspend: false to enable testing, then set to true or delete this file after testing
+  suspend: false

@@ -1,3 +1,17 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: homelab-feature-unifi-os
+  namespace: flux-system
+spec:
+  interval: 1m
+  ref:
+    branch: feature/unifi-os
+  secretRef:
+    name: flux-system
+  url: ssh://git@github.com/arjansiemons/homelab
+---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -9,8 +23,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: homelab
-    branch: feature/unifi-os
+    name: homelab-feature-unifi-os
   dependsOn:
     - name: infrastructure
   # Set suspend: false to enable testing, then set to true or delete this file after testing

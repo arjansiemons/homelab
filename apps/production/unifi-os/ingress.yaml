@@ -1,0 +1,26 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: unifi-os
+  namespace: unifi-os
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`unifi-os.local.siemons-it.nl`)
+      kind: Rule
+      services:
+        - name: unifi-os-service
+          port: 443
+          scheme: https
+          serversTransport: unifi-os-transport
+  tls:
+    secretName: local-siemons-it-nl-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: unifi-os-transport
+  namespace: unifi-os
+spec:
+  insecureSkipVerify: true

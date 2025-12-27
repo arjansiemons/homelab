@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: unifi-os-service
   namespace: unifi-os
+  labels:
+    app.kubernetes.io/instance: unifi-os-server
+    app.kubernetes.io/name: unifi-os-server
   annotations:
     service.cilium.io/global: "true"
     service.cilium.io/shared: "true"
@@ -10,7 +13,8 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: unifi-os-server
+    app.kubernetes.io/instance: unifi-os-server
+    app.kubernetes.io/name: unifi-os-server
   ports:
     - name: webui
       port: 443

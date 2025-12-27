@@ -3,17 +3,22 @@ kind: Deployment
 metadata:
   name: unifi-os-server
   namespace: unifi-os
+  labels:
+    app.kubernetes.io/instance: unifi-os-server
+    app.kubernetes.io/name: unifi-os-server
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: unifi-os-server
+      app.kubernetes.io/instance: unifi-os-server
+      app.kubernetes.io/name: unifi-os-server
   template:
     metadata:
       labels:
-        app: unifi-os-server
+        app.kubernetes.io/instance: unifi-os-server
+        app.kubernetes.io/name: unifi-os-server
     spec:
       containers:
         - name: unifi-os-server

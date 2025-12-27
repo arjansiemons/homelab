@@ -17,16 +17,4 @@ spec:
     - from: []
   egress:
     # Allow all egress (for internet access, updates, and external services)
-    - to:
-        - namespaceSelector: {}
-    # Allow DNS
-    - to:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: kube-system
-      ports:
-        - protocol: UDP
-          port: 53
-    # Allow all external traffic
-    - to:
-        - namespaceSelector: {}
+    - {}

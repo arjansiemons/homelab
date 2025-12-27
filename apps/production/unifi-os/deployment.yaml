@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: unifi-os-server
-          image: ghcr.io/lemker/unifi-os-server:latest
+          image: ghcr.io/lemker/unifi-os-server:5.0.6
           ports:
             - containerPort: 443
               name: webui

@@ -64,7 +64,7 @@ spec:
               protocol: TCP
           env:
             - name: UOS_SYSTEM_IP
-              value: "192.168.2.66"
+              value: "192.168.2.21"
           securityContext:
             privileged: true
           volumeMounts:

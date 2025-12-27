@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi-os-server
+  namespace: unifi-os
+  labels:
+    app.kubernetes.io/instance: unifi-os-server
+    app.kubernetes.io/name: unifi-os-server
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: unifi-os-server
+      app.kubernetes.io/name: unifi-os-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: unifi-os-server
+        app.kubernetes.io/name: unifi-os-server
+    spec:
+      containers:
+        - name: unifi-os-server
+          image: ghcr.io/lemker/unifi-os-server:5.0.6
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 443
+              name: webui
+              protocol: TCP
+            - containerPort: 8080
+              name: communication
+              protocol: TCP
+            - containerPort: 8443
+              name: network-app
+              protocol: TCP
+            - containerPort: 8444
+              name: hotspot-secure
+              protocol: TCP
+            - containerPort: 8880
+              name: hotspot-redir0
+              protocol: TCP
+            - containerPort: 8881
+              name: hotspot-redir1
+              protocol: TCP
+            - containerPort: 8882
+              name: hotspot-redir2
+              protocol: TCP
+            - containerPort: 3478
+              name: stun
+              protocol: UDP
+            - containerPort: 5005
+              name: rtp
+              protocol: TCP
+            - containerPort: 5514
+              name: syslog
+              protocol: UDP
+            - containerPort: 5671
+              name: aqmps
+              protocol: TCP
+            - containerPort: 6789
+              name: mobile-speed
+              protocol: TCP
+            - containerPort: 9543
+              name: id-hub
+              protocol: TCP
+            - containerPort: 10003
+              name: discovery
+              protocol: UDP
+            - containerPort: 11084
+              name: site-super
+              protocol: TCP
+          env:
+            - name: UOS_SYSTEM_IP
+              value: "192.168.2.21"
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: unifi-os-storage
+              mountPath: /persistent
+              subPath: persistent
+            - name: unifi-os-storage
+              mountPath: /var/log
+              subPath: log
+            - name: unifi-os-storage
+              mountPath: /data
+              subPath: data
+            - name: unifi-os-storage
+              mountPath: /srv
+              subPath: srv
+            - name: unifi-os-storage
+              mountPath: /var/lib/unifi
+              subPath: unifi
+            - name: unifi-os-storage
+              mountPath: /var/lib/mongodb
+              subPath: mongodb
+            - name: unifi-os-storage
+              mountPath: /etc/rabbitmq/ssl
+              subPath: rabbitmq
+          livenessProbe:
+            httpGet:
+              path: /api/ping
+              port: 443
+            initialDelaySeconds: 60
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 2Gi
+            limits:
+              cpu: 4000m
+              memory: 8Gi
+      volumes:
+        - name: unifi-os-storage
+          persistentVolumeClaim:
+            claimName: unifi-os-pvc

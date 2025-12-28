@@ -78,25 +78,6 @@ spec:
           volumeMounts:
             - name: unifi-os-storage
               mountPath: /persistent
-              subPath: persistent
-            - name: unifi-os-storage
-              mountPath: /var/log
-              subPath: log
-            - name: unifi-os-storage
-              mountPath: /data
-              subPath: data
-            - name: unifi-os-storage
-              mountPath: /srv
-              subPath: srv
-            - name: unifi-os-storage
-              mountPath: /var/lib/unifi
-              subPath: unifi
-            - name: unifi-os-storage
-              mountPath: /var/lib/mongodb
-              subPath: mongodb
-            - name: unifi-os-storage
-              mountPath: /etc/rabbitmq/ssl
-              subPath: rabbitmq
           livenessProbe:
             httpGet:
               path: /api/ping

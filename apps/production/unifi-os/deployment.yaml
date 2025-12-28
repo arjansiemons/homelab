@@ -7,11 +7,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: unifi-os-server
+      app.kubernetes.io/instance: unifi-os-server
+      app.kubernetes.io/name: unifi-os-server
   template:
     metadata:
       labels:
-        app: unifi-os-server
+        app.kubernetes.io/instance: unifi-os-server
+        app.kubernetes.io/name: unifi-os-server
     spec:
       containers:
         - name: unifi-os-server

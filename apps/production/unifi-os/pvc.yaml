@@ -7,6 +7,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: proxmox-csi
+  volumeName: pvc-a0b2c71f-8892-4475-a232-5d742cabec19
   resources:
     requests:
       storage: 16Gi

@@ -30,7 +30,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: frontend
-          image: "ghcr.io/arjansiemons/cert-practice-frontend:1.0.4" # {"$imagepolicy": "flux-system:cert-practice-frontend"}
+          image: "ghcr.io/arjansiemons/cert-practice-frontend:1.0.5" # {"$imagepolicy": "flux-system:cert-practice-frontend"}
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ

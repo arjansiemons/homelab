@@ -1,0 +1,67 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: cert-practice-backend
+  namespace: flux-system
+spec:
+  image: ghcr.io/arjansiemons/cert-practice-backend
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageRepository
+metadata:
+  name: cert-practice-frontend
+  namespace: flux-system
+spec:
+  image: ghcr.io/arjansiemons/cert-practice-frontend
+  interval: 1m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: cert-practice-backend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: cert-practice-backend
+  policy:
+    semver:
+      range: "1.0.x"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImagePolicy
+metadata:
+  name: cert-practice-frontend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: cert-practice-frontend
+  policy:
+    semver:
+      range: "1.0.x"
+---
+apiVersion: image.toolkit.fluxcd.io/v1
+kind: ImageUpdateAutomation
+metadata:
+  name: cert-practice
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: homelab
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: 'chore(cert-practice): update images to {{ .Updated.Tag }}'
+    push:
+      branch: main
+  update:
+    path: ./apps/production/cert-practice
+    strategy: Setters

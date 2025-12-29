@@ -59,7 +59,12 @@ spec:
       author:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
-      messageTemplate: 'chore(cert-practice): update images to {{ .Updated.Tag }}'
+      messageTemplate: |
+        chore(cert-practice): update images
+
+        {{ range .Changed.Changes -}}
+        - {{ .OldValue }} -> {{ .NewValue }}
+        {{ end -}}
     push:
       branch: main
   update:

@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: unifi-os-init-subpaths
+  namespace: unifi-os
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: init
+        image: busybox:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        command:
+        - sh
+        - -c
+        - |
+          mkdir -p /mnt/volume/persistent
+          mkdir -p /mnt/volume/log
+          mkdir -p /mnt/volume/data
+          mkdir -p /mnt/volume/unifi
+          mkdir -p /mnt/volume/mongodb
+          mkdir -p /mnt/volume/rabbitmq
+          echo "SubPath directories created"
+          ls -la /mnt/volume/
+        volumeMounts:
+        - name: volume
+          mountPath: /mnt/volume
+      volumes:
+      - name: volume
+        persistentVolumeClaim:
+          claimName: unifi-os-pvc

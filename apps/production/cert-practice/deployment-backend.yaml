@@ -30,7 +30,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: backend
-          image: "ghcr.io/arjansiemons/cert-practice-backend:v1.0.0"
+          image: "ghcr.io/arjansiemons/cert-practice-backend:v1.0.1"
           imagePullPolicy: IfNotPresent
           env:
             - name: DATABASE_URL

@@ -1,0 +1,15 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cert-practice-postgres
+  namespace: postgresql-system
+spec:
+  instances: 1  # Single instance is fine for this app
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
+  storage:
+    size: 5Gi
+    storageClass: proxmox-csi
+  bootstrap:
+    initdb:
+      database: cert_practice
+      owner: certpractice

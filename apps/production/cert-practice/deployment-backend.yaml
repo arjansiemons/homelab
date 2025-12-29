@@ -11,7 +11,7 @@ spec:
   revisionHistoryLimit: 3
   replicas: 1
   strategy:
-    type: Recreate
+    type: RollingUpdate
   selector:
     matchLabels:
       app.kubernetes.io/name: cert-practice
@@ -30,7 +30,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: backend
-          image: "ghcr.io/arjansiemons/cert-practice-backend:1.0.4"
+          image: "ghcr.io/arjansiemons/cert-practice-backend:1.0.4" # {"$imagepolicy": "flux-system:cert-practice-backend"}
           imagePullPolicy: IfNotPresent
           env:
             - name: DATABASE_URL

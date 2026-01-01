@@ -27,7 +27,7 @@ spec:
     name: cert-practice-backend
   policy:
     semver:
-      range: "1.0.x"
+      range: ">=1.0.0"
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
@@ -39,7 +39,7 @@ spec:
     name: cert-practice-frontend
   policy:
     semver:
-      range: "1.0.x"
+      range: ">=1.0.0"
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation

@@ -30,7 +30,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: backend
-          image: "ghcr.io/arjansiemons/cert-practice-backend:1.2.1" # {"$imagepolicy": "flux-system:cert-practice-backend"}
+          image: "ghcr.io/arjansiemons/cert-practice-backend:1.2.2" # {"$imagepolicy": "flux-system:cert-practice-backend"}
           imagePullPolicy: IfNotPresent
           env:
             - name: DATABASE_URL

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: apple-health-lake-data
+  namespace: default
+  labels:
+    app.kubernetes.io/instance: apple-health-lake
+    app.kubernetes.io/name: apple-health-lake
+    app.kubernetes.io/component: storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: local-path

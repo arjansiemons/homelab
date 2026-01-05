@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - blog
   - cert-practice
-  - clawdbot
   - mealie
   - mosquitto
   - n8n

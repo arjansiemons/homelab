@@ -25,7 +25,7 @@ spec:
             - dist/index.js
             - gateway-daemon
             - --bind
-            - "0.0.0.0"
+            - lan
             - --port
             - "18789"
           ports:

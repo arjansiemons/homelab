@@ -4,7 +4,7 @@ metadata:
   name: clawdbot-gateway
   namespace: clawdbot
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - name: gateway
       port: 18789

@@ -20,7 +20,9 @@ spec:
         - name: clawdbot-gateway
           image: ghcr.io/arjansiemons/clawdbot:latest
           imagePullPolicy: Always
-          args:
+          command:
+            - node
+            - dist/index.js
             - gateway-daemon
             - --bind
             - "0.0.0.0"

@@ -37,17 +37,13 @@ spec:
           image: ghcr.io/arjansiemons/clawdbot:latest
           imagePullPolicy: Always
           command:
-            - sleep
-            - infinity
-          # ORIGINAL COMMAND (uncomment when fixed):
-          # command:
-          #   - node
-          #   - dist/index.js
-          #   - gateway-daemon
-          #   - --bind
-          #   - lan
-          #   - --port
-          #   - "18789"
+            - node
+            - dist/index.js
+            - gateway-daemon
+            - --bind
+            - lan
+            - --port
+            - "18789"
           ports:
             - name: gateway
               containerPort: 18789

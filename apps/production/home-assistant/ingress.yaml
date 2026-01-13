@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: home-assistant-ingress
+  namespace: default
+  annotations:
+    cert-manager.io/issuer: "local-siemons-it-nl"
+spec:
+  tls:
+    - hosts:
+        - ha.local.siemons-it.nl
+      secretName: local-siemons-it-nl-tls
+  rules:
+    - host: ha.local.siemons-it.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: home-assistant
+                port:
+                  number: 8123

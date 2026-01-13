@@ -7,11 +7,11 @@ metadata:
     app.kubernetes.io/instance: home-assistant
     app.kubernetes.io/name: home-assistant
     kubernetes.io/service-name: home-assistant
-addressType: FQDN
+addressType: IPv4
 ports:
   - name: http
     port: 8123
     protocol: TCP
 endpoints:
   - addresses:
-      - homeassistant.local
+      - 192.168.2.163

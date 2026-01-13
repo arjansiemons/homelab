@@ -5,6 +5,7 @@ metadata:
   namespace: default
   annotations:
     cert-manager.io/issuer: "local-siemons-it-nl"
+    traefik.ingress.kubernetes.io/router.middlewares: default-home-assistant-websocket@kubernetescrd
 spec:
   tls:
     - hosts:

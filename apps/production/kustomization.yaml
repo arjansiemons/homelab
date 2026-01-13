@@ -7,6 +7,5 @@ resources:
   - mealie
   - mosquitto
   - n8n
-  - unifi-controller
   - unifi-os
   - zigbee2mqtt

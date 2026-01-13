@@ -7,7 +7,6 @@ resources:
   - service.yaml
   - endpoints.yaml
   - ingress.yaml
-  - middleware.yaml
 
 labels:
   - pairs:

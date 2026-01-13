@@ -15,3 +15,5 @@ ports:
 endpoints:
   - addresses:
       - 192.168.2.163
+    conditions:
+      ready: true

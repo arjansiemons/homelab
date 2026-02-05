@@ -27,7 +27,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: mealie-mealie
-          image: "hkotel/mealie:v3.9.2"
+          image: "hkotel/mealie:v3.10.2"
           imagePullPolicy: IfNotPresent
           env:
             - name: API_URL

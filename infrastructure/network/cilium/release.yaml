@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: cilium
-        namespace: flux-system
+        namespace: cilium-system
   values:
     cluster:
       name: talos

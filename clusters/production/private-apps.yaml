@@ -24,5 +24,5 @@ spec:
   ref:
     branch: main
   secretRef:
-    name: flux-system
+    name: homelab-private
   url: ssh://git@github.com/arjansiemons/homelab-private

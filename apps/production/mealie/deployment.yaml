@@ -29,11 +29,6 @@ spec:
         - name: mealie-mealie
           image: "hkotel/mealie:v3.11.0"
           imagePullPolicy: IfNotPresent
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: false  # mealie writes to /app/data
-            capabilities:
-              drop: ["ALL"]
           env:
             - name: API_URL
               value: http://localhost:9000

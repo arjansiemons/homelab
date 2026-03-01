@@ -32,7 +32,6 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: false  # mealie writes to /app/data
-            runAsNonRoot: true
             capabilities:
               drop: ["ALL"]
           env:

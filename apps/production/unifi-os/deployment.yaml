@@ -5,6 +5,8 @@ metadata:
   namespace: unifi-os
 spec:
   replicas: 1
+  strategy:
+    type: Recreate  # RWO PVC with subPaths — must not run two pods simultaneously
   selector:
     matchLabels:
       app.kubernetes.io/instance: unifi-os-server

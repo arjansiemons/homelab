@@ -25,13 +25,19 @@ spec:
         app.kubernetes.io/component: ingester
     spec:
       serviceAccountName: default
-      automountServiceAccountToken: true
+      automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:
         - name: ingester
           image: "ghcr.io/arjansiemons/apple-health-lake:0.1.0" # {"$imagepolicy": "flux-system:apple-health-lake"}
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            capabilities:
+              drop: ["ALL"]
           env:
             - name: API_HOST
               value: "0.0.0.0"

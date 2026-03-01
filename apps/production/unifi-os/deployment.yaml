@@ -68,7 +68,7 @@ spec:
             - name: UOS_SYSTEM_IP
               value: "192.168.2.21"
           securityContext:
-            privileged: true
+            privileged: true  # Required: network stack needs host-level privileges
           volumeMounts:
             - name: unifi-os-storage
               mountPath: /persistent
@@ -94,9 +94,15 @@ spec:
           livenessProbe:
             httpGet:
               path: /api/ping
-              port: 80
+              port: 8080
             initialDelaySeconds: 60
             periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/ping
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
           resources:
             requests:
               cpu: 1000m

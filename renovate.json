@@ -20,6 +20,11 @@
           "patch"
         ],
         "automerge": true
+      },
+      {
+        "description": "Ignore own images managed by Flux ImageUpdateAutomation",
+        "matchPackageNames": ["ghcr.io/arjansiemons/**"],
+        "enabled": false
       }
     ]
   }

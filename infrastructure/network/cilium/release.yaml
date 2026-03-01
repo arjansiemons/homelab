@@ -4,6 +4,7 @@ metadata:
   name: cilium
   namespace: cilium-system
 spec:
+  suspend: true
   interval: 1h
   chart:
     spec:

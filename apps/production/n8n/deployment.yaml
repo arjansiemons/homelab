@@ -21,6 +21,11 @@ spec:
         - name: n8n
           image: n8nio/n8n:2.10.2
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop: ["ALL"]
           ports:
             - containerPort: 3008
           livenessProbe:

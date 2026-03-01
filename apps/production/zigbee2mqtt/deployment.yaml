@@ -37,7 +37,17 @@ spec:
             - name: ttyusb
               mountPath: /dev/ttyUSB0
           securityContext:
-            privileged: true
+            privileged: true  # Required: accesses /dev/ttyUSB0 on host
+          livenessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
           env:
             - name: TZ
               value: Europe/Amsterdam

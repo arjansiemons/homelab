@@ -26,6 +26,7 @@ metadata:
   name: apple-health-lake
   namespace: flux-system
 spec:
+  suspend: true  # Private registry — Renovate handles image updates instead
   interval: 1m0s
   sourceRef:
     kind: GitRepository

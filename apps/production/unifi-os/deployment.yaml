@@ -91,18 +91,6 @@ spec:
             - name: unifi-os-storage
               mountPath: /etc/rabbitmq/ssl
               subPath: rabbitmq
-          livenessProbe:
-            httpGet:
-              path: /api/ping
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /api/ping
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 10
           resources:
             requests:
               cpu: 1000m

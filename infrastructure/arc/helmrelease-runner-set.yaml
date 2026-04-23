@@ -44,7 +44,7 @@ spec:
           fsGroup: 1001
         containers:
           - name: runner
-            image: ghcr.io/actions/actions-runner:2.333.1
+            image: ghcr.io/actions/actions-runner:2.334.0
             command:
               - /home/runner/run.sh
             env:

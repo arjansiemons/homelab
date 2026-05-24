@@ -6,6 +6,23 @@ metadata:
 spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://${B2_BUCKET_NAME}/cnpg/n8n-postgres
+      endpointURL: ${B2_S3_URL}
+      s3Credentials:
+        accessKeyId:
+          name: cnpg-backup-b2-credentials
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: cnpg-backup-b2-credentials
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+        maxParallel: 4
+      data:
+        compression: gzip
+    retentionPolicy: "14d"
   storage:
     size: 10Gi
     storageClass: proxmox-csi

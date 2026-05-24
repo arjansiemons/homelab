@@ -7,6 +7,8 @@ resources:
   - namespace.yaml
   - helm-repository.yaml
   - release.yaml
+  - backups/external-secret-b2.yaml
+  - backups/scheduled-backups.yaml
   - databases/cert-practice.yaml
   - databases/n8n.yaml
 

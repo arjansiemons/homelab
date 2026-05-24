@@ -12,7 +12,6 @@ resources:
   - snapshot-controller-rbac.yaml
   - snapshot-controller.yaml
   - volume-snapshot-class.yaml
-  - schedules.yaml
 
 labels:
   - includeSelectors: true

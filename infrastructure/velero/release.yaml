@@ -45,7 +45,7 @@ spec:
           bucket: ${B2_BUCKET_NAME}
           config:
             region: ${B2_REGION}
-            s3Url: ${B2_S3_URL}
+            s3Url: https://${B2_S3_URL}
             s3ForcePathStyle: "true"
       volumeSnapshotLocation:
         - name: default

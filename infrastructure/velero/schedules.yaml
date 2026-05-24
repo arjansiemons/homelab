@@ -9,9 +9,9 @@ spec:
     ttl: 336h0m0s
     storageLocation: default
     includedNamespaces:
-      - default
-      - n8n
-      - unifi-os
+      - '*'
+    excludedNamespaces:
+      - arc-runners
     snapshotVolumes: true
     defaultVolumesToFsBackup: true
     includeClusterResources: true
@@ -27,9 +27,9 @@ spec:
     ttl: 2160h0m0s
     storageLocation: default
     includedNamespaces:
-      - default
-      - n8n
-      - unifi-os
+      - '*'
+    excludedNamespaces:
+      - arc-runners
     snapshotVolumes: true
     defaultVolumesToFsBackup: true
     includeClusterResources: true

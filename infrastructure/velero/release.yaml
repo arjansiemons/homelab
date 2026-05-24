@@ -21,6 +21,7 @@ spec:
         name: velero
         namespace: flux-system
   values:
+    upgradeCRDs: false
     credentials:
       useSecret: true
       existingSecret: velero-b2-credentials

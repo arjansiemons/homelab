@@ -6,6 +6,11 @@ resources:
   - helmrepo.yaml
   - external-secret.yaml
   - release.yaml
+  - snapshot-crd-volumesnapshotclasses.yaml
+  - snapshot-crd-volumesnapshotcontents.yaml
+  - snapshot-crd-volumesnapshots.yaml
+  - snapshot-controller-rbac.yaml
+  - snapshot-controller.yaml
   - volume-snapshot-class.yaml
   - schedules.yaml
 

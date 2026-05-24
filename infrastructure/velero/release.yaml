@@ -26,8 +26,8 @@ spec:
       existingSecret: velero-b2-credentials
     kubectl:
       image:
-        repository: registry.k8s.io/kubectl
-        tag: v1.34.1
+        repository: docker.io/bitnami/kubectl
+        tag: latest
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.10.1

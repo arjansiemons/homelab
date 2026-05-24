@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - blog
   - cert-practice
+  - grocy
   - home-assistant
   - mealie
   - mosquitto

@@ -1,0 +1,76 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+  namespace: monitoring
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: ">=60.0.0 <70.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  values:
+    alertmanager:
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: local-siemons-it-nl
+        hosts:
+          - alertmanager.local.siemons-it.nl
+        tls:
+          - secretName: local-siemons-it-nl-tls
+            hosts:
+              - alertmanager.local.siemons-it.nl
+    grafana:
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: local-siemons-it-nl
+        hosts:
+          - grafana.local.siemons-it.nl
+        tls:
+          - secretName: local-siemons-it-nl-tls
+            hosts:
+              - grafana.local.siemons-it.nl
+      persistence:
+        enabled: true
+        storageClassName: proxmox-csi
+        accessModes:
+          - ReadWriteOnce
+        size: 5Gi
+    prometheus:
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        annotations:
+          cert-manager.io/cluster-issuer: local-siemons-it-nl
+        hosts:
+          - prom.local.siemons-it.nl
+        tls:
+          - secretName: local-siemons-it-nl-tls
+            hosts:
+              - prom.local.siemons-it.nl
+      prometheusSpec:
+        retention: 10d
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              storageClassName: proxmox-csi
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 20Gi

@@ -9,7 +9,7 @@ spec:
   backup:
     barmanObjectStore:
       destinationPath: s3://${B2_BUCKET_NAME}/cnpg/cert-practice-postgres
-      endpointURL: ${B2_S3_URL}
+      endpointURL: https://${B2_S3_URL}
       s3Credentials:
         accessKeyId:
           name: cnpg-backup-b2-credentials

@@ -8,8 +8,8 @@ spec:
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   backup:
     barmanObjectStore:
-      destinationPath: s3://${B2_BUCKET_NAME}/cnpg/n8n-postgres
-      endpointURL: https://${B2_S3_URL}
+      destinationPath: s3://homelab-backups-prod/cnpg/n8n-postgres
+      endpointURL: https://s3.eu-central-003.backblazeb2.com
       s3Credentials:
         accessKeyId:
           name: cnpg-backup-b2-credentials

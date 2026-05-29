@@ -21,6 +21,14 @@ spec:
     remediation:
       retries: 3
   values:
+    kubeControllerManager:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeScheduler:
+      enabled: false
     alertmanager:
       ingress:
         enabled: true

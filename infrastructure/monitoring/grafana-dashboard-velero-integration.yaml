@@ -1,0 +1,2061 @@
+apiVersion: v1
+data:
+  velero-cluster-view.json: |-
+    {
+          "links": [
+             {
+                "keepTime": true,
+                "title": "Velero logs",
+                "type": "link",
+                "url": "/d/velero-logs"
+             },
+             {
+                "keepTime": true,
+                "title": "Velero overview",
+                "type": "link",
+                "url": "/d/velero-overview"
+             }
+          ],
+          "panels": [
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of successful backups across all clusters.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 0,
+                   "y": 0
+                },
+                "id": 1,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (cluster) ((increase(velero_backup_success_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "Backups"
+                   }
+                ],
+                "title": "Successful backups / $__interval ",
+                "type": "stat"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed backups across all clusters",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 4,
+                   "y": 0
+                },
+                "id": 2,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (cluster) ((increase(velero_backup_failure_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "Backups"
+                   }
+                ],
+                "title": "Failed backups / $__interval ",
+                "type": "stat"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of succesful restores across all clusters.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 8,
+                   "y": 0
+                },
+                "id": 3,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (cluster) ((increase(velero_restore_success_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "Restores"
+                   }
+                ],
+                "title": "Succesful restores / $__interval ",
+                "type": "stat"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed restores across all clusters.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 12,
+                   "y": 0
+                },
+                "id": 4,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (cluster) ((increase(velero_restore_failed_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "Restores"
+                   }
+                ],
+                "title": "Failed restores / $__interval ",
+                "type": "stat"
+             },
+             {
+                "datasource": {
+                   "type": "datasource",
+                   "uid": "-- Mixed --"
+                },
+                "description": "Status of firing alerts for Velero.",
+                "gridPos": {
+                   "h": 4,
+                   "w": 8,
+                   "x": 16,
+                   "y": 0
+                },
+                "id": 5,
+                "options": {
+                   "alertInstanceLabelFilter": "job=~\"${job:regex}\",cluster=~\"${cluster:regex}\""
+                },
+                "pluginVersion": "v10.0.0",
+                "title": "Velero alerts",
+                "type": "alertlist"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "The top clusters by number of backups.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 12,
+                   "x": 0,
+                   "y": 6
+                },
+                "id": 6,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_backup_success_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_backup_failure_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_backup_attempt_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - attempt"
+                   }
+                ],
+                "title": "Top clusters by backups / $__interval ",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Top clusters by number of restores.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 12,
+                   "x": 12,
+                   "y": 6
+                },
+                "id": 7,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_restore_success_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_restore_failed_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_restore_success_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - attempt"
+                   }
+                ],
+                "title": "Top clusters by restores / $__interval ",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Top clusters by size of backups.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      },
+                      "unit": "decbytes"
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 24,
+                   "x": 0,
+                   "y": 12
+                },
+                "id": 8,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "table",
+                      "placement": "right"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (velero_backup_tarball_size_bytes{job=~\"$job\",cluster=~\"$cluster\"}))",
+                      "legendFormat": "{{cluster}}"
+                   }
+                ],
+                "title": "Top clusters by backup size",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Top clusters by number of volume snapshots.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 12,
+                   "x": 0,
+                   "y": 18
+                },
+                "id": 9,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_volume_snapshot_success_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_volume_snapshot_failure_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_volume_snapshot_attempt_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - attempt"
+                   }
+                ],
+                "title": "Top clusters by volume snapshots / $__interval ",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Top clusters by number of CSI snapshots.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 12,
+                   "x": 12,
+                   "y": 18
+                },
+                "id": 10,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_csi_snapshot_success_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_csi_snapshot_failure_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "topk by(cluster)($top_cluster_count, sum by (cluster) (increase(velero_csi_snapshot_attempt_total{job=~\"$job\",cluster=~\"$cluster\"}[$__interval:])))",
+                      "legendFormat": "{{cluster}} - attempt"
+                   }
+                ],
+                "title": "Top clusters by CSI snapshots / $__interval ",
+                "type": "timeseries"
+             }
+          ],
+          "refresh": "1m",
+          "schemaVersion": 36,
+          "tags": [
+             "velero"
+          ],
+          "templating": {
+             "list": [
+                {
+                   "label": "Prometheus data source",
+                   "name": "prometheus_datasource",
+                   "query": "prometheus",
+                   "regex": "",
+                   "type": "datasource"
+                },
+                {
+                   "allValue": ".+",
+                   "datasource": {
+                      "type": "prometheus",
+                      "uid": "${prometheus_datasource}"
+                   },
+                   "includeAll": true,
+                   "label": "Job",
+                   "multi": true,
+                   "name": "job",
+                   "query": "label_values(velero_backup_success_total{job=\"integrations/velero\"}, job)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "allValue": ".+",
+                   "datasource": {
+                      "type": "prometheus",
+                      "uid": "${prometheus_datasource}"
+                   },
+                   "includeAll": true,
+                   "label": "Cluster",
+                   "multi": true,
+                   "name": "cluster",
+                   "query": "label_values(velero_backup_success_total{job=\"integrations/velero\",job=~\"$job\"}, cluster)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "current": {
+                      "selected": false,
+                      "text": "2",
+                      "value": "2"
+                   },
+                   "description": "This variable allows for modification of top cluster value.",
+                   "label": "Top cluster count",
+                   "name": "top_cluster_count",
+                   "options": [
+                      {
+                         "selected": true,
+                         "text": "2",
+                         "value": "2"
+                      },
+                      {
+                         "selected": false,
+                         "text": "4",
+                         "value": "4"
+                      },
+                      {
+                         "selected": false,
+                         "text": "6",
+                         "value": "6"
+                      },
+                      {
+                         "selected": false,
+                         "text": "8",
+                         "value": "8"
+                      },
+                      {
+                         "selected": false,
+                         "text": "10",
+                         "value": "10"
+                      }
+                   ],
+                   "query": "2 : 2,4 : 4,6 : 6,8 : 8,10 : 10",
+                   "type": "custom"
+                }
+             ]
+          },
+          "time": {
+             "from": "now-30m",
+             "to": "now"
+          },
+          "timezone": "default",
+          "title": "Velero cluster view",
+          "uid": "velero-cluster-view"
+       }
+  velero-logs.json: |-
+    {
+          "links": [
+             {
+                "keepTime": true,
+                "title": "Velero cluster view",
+                "type": "link",
+                "url": "/d/velero-cluster-view"
+             },
+             {
+                "keepTime": true,
+                "title": "Velero overview",
+                "type": "link",
+                "url": "/d/velero-overview"
+             }
+          ],
+          "panels": [
+             {
+                "datasource": {
+                   "type": "loki",
+                   "uid": "${loki_datasource}"
+                },
+                "description": "Logs volume grouped by \"level\" label.",
+                "fieldConfig": {
+                   "defaults": {
+                      "custom": {
+                         "drawStyle": "bars",
+                         "fillOpacity": 50,
+                         "stacking": {
+                            "mode": "normal"
+                         }
+                      },
+                      "unit": "none"
+                   },
+                   "overrides": [
+                      {
+                         "matcher": {
+                            "id": "byRegexp",
+                            "options": "(E|e)merg|(F|f)atal|(A|a)lert|(C|c)rit.*"
+                         },
+                         "properties": [
+                            {
+                               "id": "color",
+                               "value": {
+                                  "fixedColor": "purple",
+                                  "mode": "fixed"
+                               }
+                            }
+                         ]
+                      },
+                      {
+                         "matcher": {
+                            "id": "byRegexp",
+                            "options": "(E|e)(rr.*|RR.*)"
+                         },
+                         "properties": [
+                            {
+                               "id": "color",
+                               "value": {
+                                  "fixedColor": "red",
+                                  "mode": "fixed"
+                               }
+                            }
+                         ]
+                      },
+                      {
+                         "matcher": {
+                            "id": "byRegexp",
+                            "options": "(W|w)(arn.*|ARN.*|rn|RN)"
+                         },
+                         "properties": [
+                            {
+                               "id": "color",
+                               "value": {
+                                  "fixedColor": "orange",
+                                  "mode": "fixed"
+                               }
+                            }
+                         ]
+                      },
+                      {
+                         "matcher": {
+                            "id": "byRegexp",
+                            "options": "(N|n)(otice|ote)|(I|i)(nf.*|NF.*)"
+                         },
+                         "properties": [
+                            {
+                               "id": "color",
+                               "value": {
+                                  "fixedColor": "green",
+                                  "mode": "fixed"
+                               }
+                            }
+                         ]
+                      },
+                      {
+                         "matcher": {
+                            "id": "byRegexp",
+                            "options": "dbg.*|DBG.*|(D|d)(EBUG|ebug)"
+                         },
+                         "properties": [
+                            {
+                               "id": "color",
+                               "value": {
+                                  "fixedColor": "blue",
+                                  "mode": "fixed"
+                               }
+                            }
+                         ]
+                      },
+                      {
+                         "matcher": {
+                            "id": "byRegexp",
+                            "options": "(T|t)(race|RACE)"
+                         },
+                         "properties": [
+                            {
+                               "id": "color",
+                               "value": {
+                                  "fixedColor": "light-blue",
+                                  "mode": "fixed"
+                               }
+                            }
+                         ]
+                      },
+                      {
+                         "matcher": {
+                            "id": "byRegexp",
+                            "options": "logs"
+                         },
+                         "properties": [
+                            {
+                               "id": "color",
+                               "value": {
+                                  "fixedColor": "text",
+                                  "mode": "fixed"
+                               }
+                            }
+                         ]
+                      }
+                   ]
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 24,
+                   "x": 0,
+                   "y": 0
+                },
+                "id": 1,
+                "maxDataPoints": 100,
+                "options": {
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "loki",
+                         "uid": "${loki_datasource}"
+                      },
+                      "expr": "sum by (level) (count_over_time({job=\"integrations/velero\",job=~\"$job\",instance=~\"$instance\",level=~\"$level\"}\n|~ \"$regex_search\"\n\n[$__auto]))\n",
+                      "legendFormat": "{{ level }}"
+                   }
+                ],
+                "title": "Logs volume",
+                "transformations": [
+                   {
+                      "id": "renameByRegex",
+                      "options": {
+                         "regex": "Value",
+                         "renamePattern": "logs"
+                      }
+                   }
+                ],
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "datasource",
+                   "uid": "-- Mixed --"
+                },
+                "gridPos": {
+                   "h": 18,
+                   "w": 24,
+                   "x": 0,
+                   "y": 18
+                },
+                "id": 2,
+                "options": {
+                   "dedupStrategy": "exact",
+                   "enableLogDetails": true,
+                   "prettifyLogMessage": true,
+                   "showTime": false,
+                   "wrapLogMessage": false
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "loki",
+                         "uid": "${loki_datasource}"
+                      },
+                      "expr": "{job=\"integrations/velero\",job=~\"$job\",instance=~\"$instance\",level=~\"$level\"} \n|~ \"$regex_search\"\n\n\n"
+                   }
+                ],
+                "title": "Logs",
+                "type": "logs"
+             }
+          ],
+          "refresh": "1m",
+          "schemaVersion": 39,
+          "tags": [
+             "velero"
+          ],
+          "templating": {
+             "list": [
+                {
+                   "label": "Loki data source",
+                   "name": "loki_datasource",
+                   "query": "loki",
+                   "regex": "",
+                   "type": "datasource"
+                },
+                {
+                   "allValue": ".*",
+                   "datasource": {
+                      "type": "loki",
+                      "uid": "${loki_datasource}"
+                   },
+                   "includeAll": true,
+                   "label": "Job",
+                   "multi": true,
+                   "name": "job",
+                   "query": "label_values({job=\"integrations/velero\"}, job)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "allValue": ".*",
+                   "datasource": {
+                      "type": "loki",
+                      "uid": "${loki_datasource}"
+                   },
+                   "includeAll": true,
+                   "label": "Instance",
+                   "multi": true,
+                   "name": "instance",
+                   "query": "label_values({job=\"integrations/velero\",job=~\"$job\"}, instance)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "allValue": ".*",
+                   "datasource": {
+                      "type": "loki",
+                      "uid": "${loki_datasource}"
+                   },
+                   "includeAll": true,
+                   "label": "Level",
+                   "multi": true,
+                   "name": "level",
+                   "query": "label_values({job=\"integrations/velero\",job=~\"$job\",instance=~\"$instance\"}, level)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "current": {
+                      "selected": false,
+                      "text": "",
+                      "value": ""
+                   },
+                   "label": "Regex search",
+                   "name": "regex_search",
+                   "options": [
+                      {
+                         "selected": true,
+                         "text": "",
+                         "value": ""
+                      }
+                   ],
+                   "query": "",
+                   "type": "textbox"
+                },
+                {
+                   "hide": 2,
+                   "label": "Prometheus data source",
+                   "name": "prometheus_datasource",
+                   "query": "prometheus",
+                   "regex": "",
+                   "type": "datasource"
+                }
+             ]
+          },
+          "time": {
+             "from": "now-30m",
+             "to": "now"
+          },
+          "timezone": "default",
+          "title": "Velero logs",
+          "uid": "velero-logs"
+       }
+  velero-overview.json: |-
+    {
+          "links": [
+             {
+                "keepTime": true,
+                "title": "Velero logs",
+                "type": "link",
+                "url": "/d/velero-logs"
+             },
+             {
+                "keepTime": true,
+                "title": "Velero cluster view",
+                "type": "link",
+                "url": "/d/velero-cluster-view"
+             }
+          ],
+          "panels": [
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Success rate of backups within the instance in the past hour.",
+                "fieldConfig": {
+                   "defaults": {
+                      "thresholds": {
+                         "steps": [
+                            {
+                               "color": "super-light-red",
+                               "value": 0.5
+                            },
+                            {
+                               "color": "super-light-green",
+                               "value": 0.90000000000000002
+                            }
+                         ]
+                      },
+                      "unit": "percentunit"
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 0,
+                   "y": 0
+                },
+                "id": 1,
+                "pluginVersion": "v10.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "avg by (instance) (label_replace(increase(velero_backup_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}[1h]), \"schedule\", \"none\", \"schedule\", \"^$\") / label_replace(increase(velero_backup_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}[1h]), \"schedule\", \"none\", \"schedule\", \"^$\") >  0)",
+                      "legendFormat": "{{schedule}}"
+                   }
+                ],
+                "title": "Backup success rate (1 hour)",
+                "type": "gauge"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Success rate of restores within the instance in the past hour.",
+                "fieldConfig": {
+                   "defaults": {
+                      "thresholds": {
+                         "steps": [
+                            {
+                               "color": "super-light-red",
+                               "value": 0.5
+                            },
+                            {
+                               "color": "super-light-green",
+                               "value": 0.90000000000000002
+                            }
+                         ]
+                      },
+                      "unit": "percentunit"
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 4,
+                   "y": 0
+                },
+                "id": 2,
+                "pluginVersion": "v10.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "avg by (instance) (label_replace(increase(velero_restore_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}[1h]), \"schedule\", \"none\", \"schedule\", \"^$\") / label_replace(increase(velero_restore_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}[1h]), \"schedule\", \"none\", \"schedule\", \"^$\") >  0)",
+                      "legendFormat": "{{schedule}}"
+                   }
+                ],
+                "title": "Restore success rate (1 hour)",
+                "type": "gauge"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of successful backups.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 8,
+                   "y": 0
+                },
+                "id": 3,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum(increase(velero_backup_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}[$__interval:]))",
+                      "legendFormat": "Backups"
+                   }
+                ],
+                "title": "Successful backups / $__interval ",
+                "type": "stat"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed backups.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 12,
+                   "y": 0
+                },
+                "id": 4,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum(increase(velero_backup_failure_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}[$__interval:]))",
+                      "legendFormat": "Backups"
+                   }
+                ],
+                "title": "Failed backups / $__interval ",
+                "type": "stat"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed restore validations.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 16,
+                   "y": 0
+                },
+                "id": 5,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum(increase(label_replace(velero_restore_validation_failed_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]))",
+                      "legendFormat": "failure"
+                   }
+                ],
+                "title": "Restore validation failure / $__interval ",
+                "type": "stat"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed backup validations.",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "text",
+                         "mode": "fixed"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [
+                            {
+                               "color": "#5794f2",
+                               "value": null
+                            }
+                         ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 4,
+                   "w": 4,
+                   "x": 20,
+                   "y": 0
+                },
+                "id": 6,
+                "options": {
+                   "graphMode": "area",
+                   "reduceOptions": {
+                      "calcs": [
+                         "lastNotNull"
+                      ]
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum(increase(label_replace(velero_backup_validation_failure_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]))",
+                      "legendFormat": "failure"
+                   }
+                ],
+                "title": "Backup validation failure / $__interval ",
+                "type": "stat"
+             },
+             {
+                "collapsed": false,
+                "gridPos": {
+                   "h": 1,
+                   "w": 0,
+                   "x": 24,
+                   "y": 4
+                },
+                "id": 7,
+                "title": "Backup",
+                "type": "row"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed and successful backups.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 16,
+                   "x": 0,
+                   "y": 5
+                },
+                "id": 8,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "table",
+                      "placement": "right"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_backup_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_backup_failure_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_backup_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - attempt"
+                   }
+                ],
+                "title": "Backup count / $__interval ",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Success rate of backups.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "max": 1,
+                      "min": 0,
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      },
+                      "unit": "percentunit"
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 8,
+                   "x": 16,
+                   "y": 5
+                },
+                "id": 9,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_backup_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__rate_interval:]) / clamp_min(rate(label_replace(velero_backup_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__rate_interval:]),1)",
+                      "legendFormat": "{{schedule}}"
+                   }
+                ],
+                "title": "Backup success rate / $__interval",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Size of backups for this clusters given schedule.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      },
+                      "unit": "decbytes"
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 24,
+                   "x": 0,
+                   "y": 11
+                },
+                "id": 10,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "label_replace(velero_backup_tarball_size_bytes{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")",
+                      "legendFormat": "{{schedule}}"
+                   }
+                ],
+                "title": "Backup size",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "The time it took to create backups.",
+                "gridPos": {
+                   "h": 6,
+                   "w": 24,
+                   "x": 0,
+                   "y": 17
+                },
+                "id": 11,
+                "options": {
+                   "calculate": "true",
+                   "legend": "true",
+                   "yAxis": {
+                      "unit": "s"
+                   }
+                },
+                "pluginVersion": "v10.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum(increase(label_replace(velero_backup_duration_seconds_bucket{le!=\"+Inf\", job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])) by (le)"
+                   }
+                ],
+                "title": "Backup time",
+                "type": "heatmap"
+             },
+             {
+                "collapsed": false,
+                "gridPos": {
+                   "h": 1,
+                   "w": 0,
+                   "x": 24,
+                   "y": 23
+                },
+                "id": 12,
+                "title": "Restore",
+                "type": "row"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed and successful restores.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 16,
+                   "x": 0,
+                   "y": 24
+                },
+                "id": 13,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "table",
+                      "placement": "right"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_restore_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_restore_failed_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_restore_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - attempt"
+                   }
+                ],
+                "title": "Restore count / $__interval ",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Success rate of restores.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "max": 1,
+                      "min": 0,
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      },
+                      "unit": "percentunit"
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 8,
+                   "x": 16,
+                   "y": 24
+                },
+                "id": 14,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_restore_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]) / clamp_min(increase(label_replace(velero_restore_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]),1)",
+                      "legendFormat": "{{schedule}}"
+                   }
+                ],
+                "title": "Restore success rate / $__interval",
+                "type": "timeseries"
+             },
+             {
+                "collapsed": false,
+                "gridPos": {
+                   "h": 1,
+                   "w": 0,
+                   "x": 24,
+                   "y": 30
+                },
+                "id": 15,
+                "title": "CSI snapshots",
+                "type": "row"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed and successful CSI snapshots.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 16,
+                   "x": 0,
+                   "y": 31
+                },
+                "id": 16,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "table",
+                      "placement": "right"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (schedule) (increase(label_replace(velero_csi_snapshot_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]))",
+                      "legendFormat": "{{schedule}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (schedule) (increase(label_replace(velero_csi_snapshot_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]))",
+                      "legendFormat": "{{schedule}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (schedule) (increase(label_replace(velero_csi_snapshot_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]))",
+                      "legendFormat": "{{schedule}} - attempt"
+                   }
+                ],
+                "title": "CSI snapshot count / $__interval ",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Success rate of CSI snapshots.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "max": 1,
+                      "min": 0,
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      },
+                      "unit": "percentunit"
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 8,
+                   "x": 16,
+                   "y": 31
+                },
+                "id": 17,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "sum by (schedule) (increase(label_replace(velero_csi_snapshot_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]) / clamp_min(increase(label_replace(velero_csi_snapshot_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]),1)) ",
+                      "legendFormat": "{{schedule}}"
+                   }
+                ],
+                "title": "CSI snapshot success rate / $__interval",
+                "type": "timeseries"
+             },
+             {
+                "collapsed": false,
+                "gridPos": {
+                   "h": 1,
+                   "w": 0,
+                   "x": 24,
+                   "y": 37
+                },
+                "id": 18,
+                "title": "Volume snapshots",
+                "type": "row"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Number of failed and successful volume snapshots.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      }
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 16,
+                   "x": 0,
+                   "y": 38
+                },
+                "id": 19,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "table",
+                      "placement": "right"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_volume_snapshot_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - success"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_volume_snapshot_failure_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - failure"
+                   },
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_volume_snapshot_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:])",
+                      "legendFormat": "{{schedule}} - attempt"
+                   }
+                ],
+                "title": "Volume snapshot count / $__interval ",
+                "type": "timeseries"
+             },
+             {
+                "datasource": {
+                   "type": "prometheus",
+                   "uid": "${prometheus_datasource}"
+                },
+                "description": "Success rate of volume snapshots.\n",
+                "fieldConfig": {
+                   "defaults": {
+                      "color": {
+                         "fixedColor": "#5794f2",
+                         "mode": "palette-classic"
+                      },
+                      "custom": {
+                         "fillOpacity": 30,
+                         "gradientMode": "opacity",
+                         "lineInterpolation": "smooth",
+                         "lineWidth": 2,
+                         "showPoints": "never"
+                      },
+                      "max": 1,
+                      "min": 0,
+                      "thresholds": {
+                         "mode": "absolute",
+                         "steps": [ ]
+                      },
+                      "unit": "percentunit"
+                   }
+                },
+                "gridPos": {
+                   "h": 6,
+                   "w": 8,
+                   "x": 16,
+                   "y": 38
+                },
+                "id": 20,
+                "options": {
+                   "legend": {
+                      "calcs": [ ],
+                      "displayMode": "list"
+                   },
+                   "tooltip": {
+                      "mode": "multi",
+                      "sort": "desc"
+                   }
+                },
+                "pluginVersion": "v11.0.0",
+                "targets": [
+                   {
+                      "datasource": {
+                         "type": "prometheus",
+                         "uid": "${prometheus_datasource}"
+                      },
+                      "expr": "increase(label_replace(velero_volume_snapshot_success_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]) / clamp_min(increase(label_replace(velero_volume_snapshot_attempt_total{job=~\"$job\",cluster=~\"$cluster\",instance=~\"$instance\",schedule=~\"$schedule\"}, \"schedule\", \"none\", \"schedule\", \"^$\")[$__interval:]),1)",
+                      "legendFormat": "{{schedule}}"
+                   }
+                ],
+                "title": "Volume snapshot success rate / $__interval",
+                "type": "timeseries"
+             }
+          ],
+          "refresh": "1m",
+          "schemaVersion": 36,
+          "tags": [
+             "velero"
+          ],
+          "templating": {
+             "list": [
+                {
+                   "label": "Prometheus data source",
+                   "name": "prometheus_datasource",
+                   "query": "prometheus",
+                   "regex": "",
+                   "type": "datasource"
+                },
+                {
+                   "datasource": {
+                      "type": "prometheus",
+                      "uid": "${prometheus_datasource}"
+                   },
+                   "includeAll": false,
+                   "label": "Job",
+                   "multi": false,
+                   "name": "job",
+                   "query": "label_values(velero_backup_attempt_total{}, job)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "datasource": {
+                      "type": "prometheus",
+                      "uid": "${prometheus_datasource}"
+                   },
+                   "includeAll": false,
+                   "label": "Cluster",
+                   "multi": false,
+                   "name": "cluster",
+                   "query": "label_values(velero_backup_attempt_total{job=~\"$job\"}, cluster)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "datasource": {
+                      "type": "prometheus",
+                      "uid": "${prometheus_datasource}"
+                   },
+                   "includeAll": false,
+                   "label": "Instance",
+                   "multi": false,
+                   "name": "instance",
+                   "query": "label_values(velero_backup_attempt_total{}, instance)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                },
+                {
+                   "allValue": ".*",
+                   "datasource": {
+                      "type": "prometheus",
+                      "uid": "${prometheus_datasource}"
+                   },
+                   "includeAll": true,
+                   "label": "Schedule",
+                   "multi": true,
+                   "name": "schedule",
+                   "query": "label_values(velero_backup_attempt_total{job=~\"$job\", cluster=~\"$cluster\", instance=~\"$instance\"}, schedule)",
+                   "refresh": 2,
+                   "sort": 1,
+                   "type": "query"
+                }
+             ]
+          },
+          "time": {
+             "from": "now-30m",
+             "to": "now"
+          },
+          "timezone": "default",
+          "title": "Velero overview",
+          "uid": "velero-overview"
+       }
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_dashboard: "1"
+  name: grafana-dashboard-velero-integration
+  namespace: monitoring

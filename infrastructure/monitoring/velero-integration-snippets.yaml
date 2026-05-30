@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: velero-integration-snippets
+  namespace: monitoring
+data:
+  extraConfig.alloy: |
+    discovery.relabel "velero" {
+      targets = discovery.kubernetes.pods.targets
+      rule {
+        action        = "keep"
+        source_labels = ["__meta_kubernetes_pod_label_component"]
+        regex         = "velero"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_pod_container_port_number"]
+        regex = "8085"
+        action = "keep"
+      }
+      rule {
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label = "instance"
+      }
+      rule {
+        replacement = "integrations/velero"
+        target_label = "job"
+      }
+    }
+
+    prometheus.scrape "velero" {
+      job_name     = "integrations/velero"
+      targets      = discovery.relabel.velero.output
+      metrics_path = "/metrics"
+      forward_to   = [prometheus.relabel.metrics_service.receiver]
+    }
+
+  logs.extraConfig.alloy: |
+    discovery.relabel "logs_velero" {
+      targets = discovery.relabel.pod_logs.output
+
+      rule {
+        action        = "keep"
+        source_labels = ["__meta_kubernetes_pod_label_component"]
+        regex         = "velero"
+      }
+      rule {
+        target_label = "job"
+        replacement = "integrations/velero"
+      }
+      rule {
+        action = "replace"
+        source_labels = ["__meta_kubernetes_pod_name"]
+        target_label  = "pod"
+      }
+    }
+
+    loki.source.kubernetes "logs_velero" {
+      targets    = discovery.relabel.logs_velero.output
+      forward_to = [loki.process.logs_velero.receiver]
+    }
+
+    loki.process "logs_velero" {
+      forward_to = [loki.process.logs_service.receiver]
+      stage.cri {}
+      stage.multiline {
+        firstline = "time=\"(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)\""
+      }
+      stage.regex {
+        expression = "time=\"(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)\" level=(?P<level>\\w+)"
+      }
+      stage.labels {
+        values = {
+          level  = "",
+        }
+      }
+    }

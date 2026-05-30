@@ -1,0 +1,66 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: backup-health
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: velero-backups
+      rules:
+        - alert: VeleroBackupFailuresDetected
+          expr: increase(velero_backup_failure_total[30m]) > 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: Velero backup failures detected
+            description: Velero reported at least one failed backup in the last 30 minutes.
+
+        - alert: VeleroNoBackupAttempts24h
+          expr: increase(velero_backup_attempt_total[24h]) == 0
+          for: 15m
+          labels:
+            severity: critical
+          annotations:
+            summary: Velero has not attempted backups in 24h
+            description: No Velero backup attempts were observed in the last 24 hours.
+
+        - alert: VeleroLastBackupStatusFailed
+          expr: max_over_time(velero_backup_last_status[30m]) == 0
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Velero last backup status is failed
+            description: Velero reports failed status for the most recent backup in the last 30 minutes.
+
+    - name: cnpg-backups
+      rules:
+        - alert: CnpgBackupFailureAfterLastSuccess
+          expr: max by (cluster) (cnpg_collector_last_failed_backup_timestamp) > max by (cluster) (cnpg_collector_last_available_backup_timestamp)
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: CNPG backup failed after last successful backup
+            description: CNPG cluster {{ $labels.cluster }} has a failed backup newer than the last available backup.
+
+        - alert: CnpgWalArchiveBacklog
+          expr: max by (cluster) (cnpg_collector_pg_wal_archive_status{value="ready"}) > 10
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: CNPG WAL archive backlog is growing
+            description: CNPG cluster {{ $labels.cluster }} has more than 10 WAL files pending archive.
+
+        - alert: CnpgExporterDown
+          expr: min_over_time(cnpg_collector_up[10m]) == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: CNPG metrics exporter unavailable
+            description: CNPG exporter is down or not scrapeable for at least 10 minutes.

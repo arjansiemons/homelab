@@ -1,0 +1,239 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-backups
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+data:
+  backup-health-velero-cnpg.json: |
+    {
+      "annotations": {
+        "list": []
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": null,
+      "links": [],
+      "panels": [
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 1,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "sum(increase(velero_backup_failure_total[24h]))",
+              "legendFormat": "failed backups (24h)",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Velero Backup Failures (24h)",
+          "type": "stat"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "max(velero_backup_last_status)",
+              "legendFormat": "last status (1=success)",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Velero Last Backup Status",
+          "type": "stat"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 8
+          },
+          "id": 3,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "max by (cluster) (cnpg_collector_last_available_backup_timestamp)",
+              "legendFormat": "{{cluster}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CNPG Last Successful Backup Timestamp",
+          "type": "timeseries"
+        },
+        {
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 16
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "editorMode": "code",
+              "expr": "max by (cluster) (cnpg_collector_pg_wal_archive_status{value=\"ready\"})",
+              "legendFormat": "{{cluster}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "CNPG WAL Ready Backlog",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": "30s",
+      "schemaVersion": 39,
+      "tags": [
+        "backup",
+        "velero",
+        "cnpg"
+      ],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-24h",
+        "to": "now"
+      },
+      "title": "Backup Health (Velero + CNPG)",
+      "uid": "backup-health-velero-cnpg",
+      "version": 1,
+      "weekStart": ""
+    }

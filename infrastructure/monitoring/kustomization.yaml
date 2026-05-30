@@ -9,6 +9,7 @@ resources:
   - podmonitor-cnpg.yaml
   - prometheusrule-backups.yaml
   - grafana-dashboard-backups.yaml
+  - grafana-dashboard-velero-integration.yaml
   - velero-integration-snippets.yaml
 
 labels:

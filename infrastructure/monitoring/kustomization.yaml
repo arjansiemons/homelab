@@ -5,6 +5,9 @@ resources:
   - namespace.yaml
   - helmrepo.yaml
   - helmrelease.yaml
+  - servicemonitor-velero.yaml
+  - podmonitor-cnpg.yaml
+  - prometheusrule-backups.yaml
 
 labels:
   - includeSelectors: true

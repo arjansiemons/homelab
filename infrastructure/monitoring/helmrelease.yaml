@@ -42,6 +42,12 @@ spec:
             hosts:
               - alertmanager.local.siemons-it.nl
     grafana:
+      sidecar:
+        dashboards:
+          enabled: true
+          label: grafana_dashboard
+          labelValue: "1"
+          searchNamespace: monitoring
       ingress:
         enabled: true
         ingressClassName: traefik

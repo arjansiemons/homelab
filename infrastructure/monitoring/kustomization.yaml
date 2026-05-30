@@ -8,6 +8,7 @@ resources:
   - servicemonitor-velero.yaml
   - podmonitor-cnpg.yaml
   - prometheusrule-backups.yaml
+  - grafana-dashboard-backups.yaml
 
 labels:
   - includeSelectors: true

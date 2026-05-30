@@ -21,5 +21,8 @@ spec:
       relabelings:
         - targetLabel: job
           replacement: integrations/velero
-        - targetLabel: cluster
+        - sourceLabels:
+            - __address__
+          regex: .*
+          targetLabel: cluster
           replacement: homelab

@@ -28,6 +28,7 @@ spec:
               drop: ["ALL"]
           ports:
             - containerPort: 3008
+              name: http
           livenessProbe:
             httpGet:
               path: /healthz

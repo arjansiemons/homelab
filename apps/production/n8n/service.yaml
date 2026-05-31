@@ -10,6 +10,7 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
   - port: 3008
+    name: http
     protocol: TCP
     targetPort: 3008
   selector:

@@ -36,6 +36,7 @@ spec:
               value: Europe/Amsterdam
           ports:
             - containerPort: 9000
+              name: http
           livenessProbe:
             httpGet:
               path: /api/app/about

@@ -66,6 +66,7 @@ spec:
                   key: API_KEY
           ports:
             - containerPort: 8000
+              name: http
           resources:
             requests:
               memory: "256Mi"

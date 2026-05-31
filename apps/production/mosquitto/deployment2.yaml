@@ -33,7 +33,9 @@ spec:
         name: mosquitto
         ports:
         - containerPort: 1883
+          name: mqtt
         - containerPort: 9001
+          name: websocket
         resources:
           requests:
             memory: "128Mi"

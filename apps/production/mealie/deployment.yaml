@@ -21,14 +21,25 @@ spec:
         app.kubernetes.io/name: mealie
         app.kubernetes.io/instance: mealie
     spec:
-      serviceAccountName: default
+      serviceAccountName: mealie
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: mealie-mealie
           image: "hkotel/mealie:v3.19.2"
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           env:
             - name: API_URL
               value: http://localhost:9000

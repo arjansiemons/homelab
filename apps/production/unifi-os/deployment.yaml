@@ -69,6 +69,17 @@ spec:
           env:
             - name: UOS_SYSTEM_IP
               value: "192.168.2.21"
+          startupProbe:
+            tcpSocket:
+              port: 443
+            periodSeconds: 10
+            failureThreshold: 90
+          readinessProbe:
+            tcpSocket:
+              port: 443
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 6
           securityContext:
             privileged: true  # Required: network stack needs host-level privileges
           volumeMounts:
@@ -95,11 +106,11 @@ spec:
               subPath: rabbitmq
           resources:
             requests:
-              cpu: 15m
-              memory: 105M
+              cpu: 500m
+              memory: 1Gi
             limits:
-              cpu: 15m
-              memory: 105M
+              cpu: "2"
+              memory: 4Gi
       volumes:
         - name: unifi-os-storage
           persistentVolumeClaim:

@@ -6,6 +6,8 @@ resources:
   - helmrepo.yaml
   - external-secret.yaml
   - release.yaml
+  - pdb-velero.yaml
+  - networkpolicy-default.yaml
   - snapshot-crd-volumesnapshotclasses.yaml
   - snapshot-crd-volumesnapshotcontents.yaml
   - snapshot-crd-volumesnapshots.yaml
@@ -14,7 +16,7 @@ resources:
   - volume-snapshot-class.yaml
 
 labels:
-  - includeSelectors: true
+  - includeSelectors: false
     pairs:
       app.kubernetes.io/managed-by: flux
       app.kubernetes.io/part-of: velero

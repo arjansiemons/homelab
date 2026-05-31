@@ -20,6 +20,70 @@ spec:
         kind: HelmRepository
         name: velero
         namespace: flux-system
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              namespace: velero
+              name: velero
+            patch: |
+              - op: replace
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 100m
+                    memory: 256Mi
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
+              - op: replace
+                path: /spec/template/spec/initContainers/0/resources
+                value:
+                  requests:
+                    cpu: 25m
+                    memory: 64Mi
+                  limits:
+                    cpu: 200m
+                    memory: 256Mi
+          - target:
+              kind: DaemonSet
+              namespace: velero
+              name: node-agent
+            patch: |
+              - op: replace
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 100m
+                    memory: 256Mi
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
+              - op: add
+                path: /spec/template/spec/containers/0/livenessProbe
+                value:
+                  httpGet:
+                    path: /metrics
+                    port: http-monitoring
+                    scheme: HTTP
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  successThreshold: 1
+                  failureThreshold: 5
+              - op: add
+                path: /spec/template/spec/containers/0/readinessProbe
+                value:
+                  httpGet:
+                    path: /metrics
+                    port: http-monitoring
+                    scheme: HTTP
+                  initialDelaySeconds: 15
+                  periodSeconds: 30
+                  timeoutSeconds: 5
+                  successThreshold: 1
+                  failureThreshold: 5
   values:
     upgradeCRDs: false
     credentials:

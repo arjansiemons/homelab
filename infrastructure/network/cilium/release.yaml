@@ -6,6 +6,71 @@ metadata:
 spec:
   suspend: true
   interval: 1h
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: DaemonSet
+              name: cilium
+            patch: |
+              - op: replace
+                path: /spec/template/spec/initContainers/0/resources
+                value:
+                  requests:
+                    cpu: 50m
+                    memory: 64Mi
+                  limits:
+                    cpu: 200m
+                    memory: 256Mi
+              - op: replace
+                path: /spec/template/spec/initContainers/1/resources
+                value:
+                  requests:
+                    cpu: 50m
+                    memory: 64Mi
+                  limits:
+                    cpu: 200m
+                    memory: 256Mi
+              - op: replace
+                path: /spec/template/spec/initContainers/2/resources
+                value:
+                  requests:
+                    cpu: 20m
+                    memory: 32Mi
+                  limits:
+                    cpu: 200m
+                    memory: 128Mi
+              - op: replace
+                path: /spec/template/spec/initContainers/3/resources
+                value:
+                  requests:
+                    cpu: 50m
+                    memory: 64Mi
+                  limits:
+                    cpu: 300m
+                    memory: 256Mi
+              - op: replace
+                path: /spec/template/spec/initContainers/4/resources
+                value:
+                  requests:
+                    cpu: 100m
+                    memory: 10Mi
+                  limits:
+                    cpu: 200m
+                    memory: 128Mi
+          - target:
+              kind: DaemonSet
+              name: cilium-envoy
+            patch: |
+              - op: replace
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 100m
+                    memory: 128Mi
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
   chart:
     spec:
       chart: cilium

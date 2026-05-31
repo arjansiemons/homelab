@@ -4,7 +4,7 @@ metadata:
   name: cert-practice-postgres
   namespace: postgresql-system
 spec:
-  instances: 1  # Single instance is fine for this app
+  instances: 2  # Keep one replica so the generated -ro service always has endpoints
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   backup:
     barmanObjectStore:

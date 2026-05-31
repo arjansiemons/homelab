@@ -101,6 +101,34 @@ spec:
               - op: add
                 path: /automountServiceAccountToken
                 value: false
+          - target:
+              kind: Deployment
+              namespace: monitoring
+              name: kube-prometheus-stack-kube-state-metrics
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 50m
+                    memory: 128Mi
+                  limits:
+                    cpu: 300m
+                    memory: 384Mi
+          - target:
+              kind: Deployment
+              namespace: monitoring
+              name: kube-prometheus-stack-operator
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 100m
+                    memory: 256Mi
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
   values:
     prometheusOperator:
       resources:

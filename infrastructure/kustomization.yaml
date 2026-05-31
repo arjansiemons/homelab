@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - arc/
   - cert-manager/
+  - csi-proxmox/
   - cnpg/
   - external-secrets/
   - generic-device-plugin/

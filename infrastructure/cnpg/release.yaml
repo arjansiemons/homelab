@@ -21,3 +21,11 @@ spec:
         kind: HelmRepository
         name: cloudnative-pg
         namespace: postgresql-system
+  values:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi

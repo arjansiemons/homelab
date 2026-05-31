@@ -16,5 +16,6 @@ spec:
       targetPort: websocket
   selector:
     app: mosquitto
+    type: primary
   type: LoadBalancer
   # Use an loadBalancerIP (e.g. MetalLB) or externalIP depending on your setup

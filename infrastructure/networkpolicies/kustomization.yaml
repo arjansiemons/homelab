@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - np-cert-manager.yaml
+  - np-default.yaml
+  - np-external-secrets.yaml
+  - np-goldilocks.yaml
+  - np-kube-system.yaml
+  - np-monitoring.yaml
+  - np-n8n.yaml
+
+labels:
+  - includeSelectors: false
+    pairs:
+      app.kubernetes.io/managed-by: flux
+      app.kubernetes.io/part-of: networkpolicies

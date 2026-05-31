@@ -29,18 +29,30 @@ spec:
           ports:
             - containerPort: 3008
               name: http
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
           livenessProbe:
             httpGet:
               path: /healthz
-              port: 3008
-            initialDelaySeconds: 30
+              port: http
+            initialDelaySeconds: 60
             periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /healthz
-              port: 3008
+              port: http
             initialDelaySeconds: 15
             periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
           env:
             - name: DB_POSTGRESDB_HOST
               valueFrom:

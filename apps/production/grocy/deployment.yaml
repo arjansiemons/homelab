@@ -21,6 +21,8 @@ spec:
         app.kubernetes.io/name: grocy
         app.kubernetes.io/instance: grocy
     spec:
+      serviceAccountName: grocy
+      automountServiceAccountToken: false
       containers:
         - name: grocy
           image: lscr.io/linuxserver/grocy:4.6.0

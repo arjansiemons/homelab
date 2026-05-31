@@ -17,6 +17,8 @@ spec:
       labels:
         app: n8n
     spec:
+      serviceAccountName: n8n
+      automountServiceAccountToken: false
       containers:
         - name: n8n
           image: n8nio/n8n:2.23.1

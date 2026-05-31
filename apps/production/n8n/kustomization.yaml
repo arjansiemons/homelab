@@ -1,4 +1,5 @@
 resources:
+  - serviceaccount-n8n.yaml
   - serviceaccount-cloudflared.yaml
   - deployment.yaml
   - service.yaml

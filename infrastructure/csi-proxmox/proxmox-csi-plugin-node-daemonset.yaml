@@ -86,6 +86,21 @@ spec:
             - -v=5
             - --csi-address=unix:///csi/csi.sock
             - --kubelet-registration-path=/var/lib/kubelet/plugins/csi.proxmox.sinextra.dev/csi.sock
+            - --http-endpoint=:9807
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9807
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9807
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
           resources:
             requests:
               cpu: 10m

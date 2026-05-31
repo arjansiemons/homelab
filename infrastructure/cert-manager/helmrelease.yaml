@@ -13,6 +13,30 @@ spec:
         name: cert-manager-repo
       version: v1.17.1
   interval: 1m0s
+  values:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+    cainjector:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
+    webhook:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 250m
+          memory: 256Mi
   postRenderers:
     - kustomize:
         patches:

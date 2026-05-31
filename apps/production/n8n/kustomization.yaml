@@ -1,4 +1,5 @@
 resources:
+  - serviceaccount-cloudflared.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml

@@ -12,7 +12,7 @@ spec:
       targetPort: mqtt
     - name: wss
       port: 9001
-      targetPort: wss
+      targetPort: websocket
   selector:
     app: mosquitto
   type: LoadBalancer

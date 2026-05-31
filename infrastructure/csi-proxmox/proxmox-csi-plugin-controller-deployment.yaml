@@ -72,6 +72,21 @@ spec:
             - --timeout=3m
             - --leader-election
             - --default-fstype=ext4
+            - --http-endpoint=:9808
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9808
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9808
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
           resources:
             requests:
               cpu: 10m
@@ -102,6 +117,21 @@ spec:
             - --feature-gates=Topology=True
             - --enable-capacity
             - --capacity-ownerref-level=2
+            - --http-endpoint=:9809
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9809
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9809
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
           env:
             - name: NAMESPACE
               valueFrom:
@@ -138,6 +168,21 @@ spec:
             - --timeout=3m
             - --handle-volume-inuse-error=false
             - --leader-election
+            - --http-endpoint=:9810
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9810
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9810
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
           resources:
             requests:
               cpu: 10m
@@ -188,6 +233,21 @@ spec:
             - --csi-address=unix:///csi/csi.sock
             - --timeout=3m
             - --leader-election
+            - --http-endpoint=:9811
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9811
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9811
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 2
           resources:
             requests:
               cpu: 10m

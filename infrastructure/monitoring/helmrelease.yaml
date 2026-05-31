@@ -21,6 +21,15 @@ spec:
     remediation:
       retries: 3
   values:
+    prometheusOperator:
+      prometheusConfigReloader:
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
     kubeControllerManager:
       enabled: false
     kubeEtcd:
@@ -30,6 +39,14 @@ spec:
     kubeScheduler:
       enabled: false
     alertmanager:
+      alertmanagerSpec:
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
       ingress:
         enabled: true
         ingressClassName: traefik
@@ -78,6 +95,13 @@ spec:
             hosts:
               - prom.local.siemons-it.nl
       prometheusSpec:
+        resources:
+          requests:
+            cpu: 200m
+            memory: 1Gi
+          limits:
+            cpu: "1"
+            memory: 2Gi
         retention: 10d
         storageSpec:
           volumeClaimTemplate:

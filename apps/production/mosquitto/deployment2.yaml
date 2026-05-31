@@ -4,6 +4,8 @@ metadata:
   name: mosquitto-b
   namespace: default
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: mosquitto

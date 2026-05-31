@@ -20,6 +20,57 @@ spec:
   upgrade:
     remediation:
       retries: 3
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Service
+              namespace: monitoring
+              name: kube-prometheus-stack-alertmanager
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: http-web
+          - target:
+              kind: Service
+              namespace: monitoring
+              name: kube-prometheus-stack-grafana
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: grafana
+          - target:
+              kind: Service
+              namespace: monitoring
+              name: kube-prometheus-stack-prometheus
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: http-web
+          - target:
+              kind: Service
+              namespace: monitoring
+              name: kube-prometheus-stack-kube-state-metrics
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: http
+          - target:
+              kind: Service
+              namespace: monitoring
+              name: kube-prometheus-stack-prometheus-node-exporter
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: http-metrics
+          - target:
+              kind: Service
+              namespace: kube-system
+              name: kube-prometheus-stack-coredns
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: metrics
   values:
     prometheusOperator:
       prometheusConfigReloader:

@@ -18,61 +18,61 @@ spec:
   ports:
     - name: webui
       port: 443
-      targetPort: 443
+      targetPort: webui
       protocol: TCP
     - name: communication
       port: 8080
-      targetPort: 8080
+      targetPort: communication
       protocol: TCP
     - name: network-app
       port: 8443
-      targetPort: 8443
+      targetPort: network-app
       protocol: TCP
     - name: hotspot-secure
       port: 8444
-      targetPort: 8444
+      targetPort: hotspot-secure
       protocol: TCP
     - name: hotspot-redir0
       port: 8880
-      targetPort: 8880
+      targetPort: hotspot-redir0
       protocol: TCP
     - name: hotspot-redir1
       port: 8881
-      targetPort: 8881
+      targetPort: hotspot-redir1
       protocol: TCP
     - name: hotspot-redir2
       port: 8882
-      targetPort: 8882
+      targetPort: hotspot-redir2
       protocol: TCP
     - name: stun
       port: 3478
-      targetPort: 3478
+      targetPort: stun
       protocol: UDP
     - name: rtp
       port: 5005
-      targetPort: 5005
+      targetPort: rtp
       protocol: TCP
     - name: syslog
       port: 5514
-      targetPort: 5514
+      targetPort: syslog
       protocol: UDP
     - name: aqmps
       port: 5671
-      targetPort: 5671
+      targetPort: aqmps
       protocol: TCP
     - name: mobile-speed
       port: 6789
-      targetPort: 6789
+      targetPort: mobile-speed
       protocol: TCP
     - name: id-hub
       port: 9543
-      targetPort: 9543
+      targetPort: id-hub
       protocol: TCP
     - name: discovery
       port: 10003
-      targetPort: 10003
+      targetPort: discovery
       protocol: UDP
     - name: site-super
       port: 11084
-      targetPort: 11084
+      targetPort: site-super
       protocol: TCP

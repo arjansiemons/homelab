@@ -101,28 +101,20 @@ spec:
               name: goldilocks-vpa-admission-controller
             patch: |
               - op: add
-                path: /spec/template/spec/containers/0/resources
+                path: /spec/template/spec/containers/0/resources/limits
                 value:
-                  requests:
-                    cpu: 50m
-                    memory: 128Mi
-                  limits:
-                    cpu: 300m
-                    memory: 384Mi
+                  cpu: 300m
+                  memory: 384Mi
           - target:
               kind: Deployment
               namespace: goldilocks
               name: goldilocks-vpa-recommender
             patch: |
               - op: add
-                path: /spec/template/spec/containers/0/resources
+                path: /spec/template/spec/containers/0/resources/limits
                 value:
-                  requests:
-                    cpu: 50m
-                    memory: 128Mi
-                  limits:
-                    cpu: 500m
-                    memory: 512Mi
+                  cpu: 500m
+                  memory: 512Mi
           - target:
               kind: Service
               namespace: goldilocks

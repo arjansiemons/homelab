@@ -106,7 +106,7 @@ spec:
               namespace: monitoring
               name: kube-prometheus-stack-kube-state-metrics
             patch: |
-              - op: add
+              - op: replace
                 path: /spec/template/spec/containers/0/resources
                 value:
                   requests:
@@ -120,7 +120,7 @@ spec:
               namespace: monitoring
               name: kube-prometheus-stack-operator
             patch: |
-              - op: add
+              - op: replace
                 path: /spec/template/spec/containers/0/resources
                 value:
                   requests:
@@ -252,7 +252,7 @@ spec:
               resources:
                 requests:
                   storage: 20Gi
-    kubeStateMetrics:
+    kube-state-metrics:
       resources:
         requests:
           cpu: 50m

@@ -5,7 +5,7 @@ resources:
   - daemonset.yaml
 
 labels:
-  - includeSelectors: true
+  - includeSelectors: false
     pairs:
       app.kubernetes.io/managed-by: flux
       app.kubernetes.io/part-of: generic-device-plugin

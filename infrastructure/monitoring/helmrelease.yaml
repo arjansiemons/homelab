@@ -101,99 +101,15 @@ spec:
               - op: add
                 path: /automountServiceAccountToken
                 value: false
-          - target:
-              kind: Deployment
-              namespace: monitoring
-              name: kube-prometheus-stack-grafana
-            patch: |
-              apiVersion: apps/v1
-              kind: Deployment
-              metadata:
-                name: kube-prometheus-stack-grafana
-                namespace: monitoring
-              spec:
-                template:
-                  spec:
-                    initContainers:
-                      - name: init-chown-data
-                        resources:
-                          requests:
-                            cpu: 10m
-                            memory: 64Mi
-                          limits:
-                            cpu: 100m
-                            memory: 128Mi
-                    containers:
-                      - name: grafana
-                        resources:
-                          requests:
-                            cpu: 100m
-                            memory: 256Mi
-                          limits:
-                            cpu: 500m
-                            memory: 512Mi
-                      - name: grafana-sc-dashboard
-                        resources:
-                          requests:
-                            cpu: 10m
-                            memory: 64Mi
-                          limits:
-                            cpu: 100m
-                            memory: 128Mi
-                      - name: grafana-sc-datasources
-                        resources:
-                          requests:
-                            cpu: 10m
-                            memory: 64Mi
-                          limits:
-                            cpu: 100m
-                            memory: 128Mi
-          - target:
-              kind: Deployment
-              namespace: monitoring
-              name: kube-prometheus-stack-kube-state-metrics
-            patch: |
-              apiVersion: apps/v1
-              kind: Deployment
-              metadata:
-                name: kube-prometheus-stack-kube-state-metrics
-                namespace: monitoring
-              spec:
-                template:
-                  spec:
-                    containers:
-                      - name: kube-state-metrics
-                        resources:
-                          requests:
-                            cpu: 50m
-                            memory: 128Mi
-                          limits:
-                            cpu: 300m
-                            memory: 384Mi
-          - target:
-              kind: Deployment
-              namespace: monitoring
-              name: kube-prometheus-stack-operator
-            patch: |
-              apiVersion: apps/v1
-              kind: Deployment
-              metadata:
-                name: kube-prometheus-stack-operator
-                namespace: monitoring
-              spec:
-                template:
-                  spec:
-                    containers:
-                      - name: kube-prometheus-stack
-                        resources:
-                          requests:
-                            cpu: 100m
-                            memory: 256Mi
-                          limits:
-                            cpu: 500m
-                            memory: 512Mi
   values:
     prometheusOperator:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
       prometheusConfigReloader:
         resources:
           requests:
@@ -231,7 +147,29 @@ spec:
             hosts:
               - alertmanager.local.siemons-it.nl
     grafana:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+      initChownData:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
       sidecar:
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
         dashboards:
           enabled: true
           label: grafana_dashboard
@@ -284,3 +222,11 @@ spec:
               resources:
                 requests:
                   storage: 20Gi
+    kubeStateMetrics:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 128Mi
+        limits:
+          cpu: 300m
+          memory: 384Mi

@@ -29,6 +29,8 @@ spec:
       enabled: false
     dashboard:
       enabled: true
+      flags:
+        on-by-default: true
       ingress:
         enabled: true
         ingressClassName: traefik
@@ -43,3 +45,6 @@ spec:
           - secretName: local-siemons-it-nl-tls
             hosts:
               - goldilocks.local.siemons-it.nl
+    controller:
+      flags:
+        on-by-default: true

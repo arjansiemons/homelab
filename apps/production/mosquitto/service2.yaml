@@ -7,7 +7,7 @@ spec:
   ports:
     - name: mqtt
       port: 1883
-      targetPort: 1883
+      targetPort: mqtt
   selector:
     app: mosquitto
     type: primary

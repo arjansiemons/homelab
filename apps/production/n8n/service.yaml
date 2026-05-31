@@ -12,7 +12,7 @@ spec:
   - port: 3008
     name: http
     protocol: TCP
-    targetPort: 3008
+    targetPort: http
   selector:
     app: n8n
   sessionAffinity: None

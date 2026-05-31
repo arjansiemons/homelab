@@ -9,10 +9,10 @@ spec:
   ports:
     - name: mqtt
       port: 1883
-      targetPort: 1883
+      targetPort: mqtt
     - name: wss
       port: 9001
-      targetPort: 9001
+      targetPort: wss
   selector:
     app: mosquitto
   type: LoadBalancer

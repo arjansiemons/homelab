@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: default
 
 resources:
+  - serviceaccount.yaml
   - deployment-backend.yaml
   - deployment-frontend.yaml
   - service-backend.yaml

@@ -20,6 +20,8 @@ spec:
       labels:
         app: blog
     spec:
+      serviceAccountName: blog
+      automountServiceAccountToken: false
       containers:
         - name: blog
           image: ghcr.io/arjansiemons/hugo-site:latest # {"$imagepolicy": "flux-system:blog"}

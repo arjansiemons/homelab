@@ -24,8 +24,8 @@ spec:
         app.kubernetes.io/instance: cert-practice
         app.kubernetes.io/component: backend
     spec:
-      serviceAccountName: default
-      automountServiceAccountToken: true
+      serviceAccountName: cert-practice
+      automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
       containers:

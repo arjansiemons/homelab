@@ -24,7 +24,7 @@ spec:
         app.kubernetes.io/instance: apple-health-lake
         app.kubernetes.io/component: ingester
     spec:
-      serviceAccountName: default
+      serviceAccountName: apple-health-lake
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       enableServiceLinks: true

@@ -4,9 +4,6 @@ metadata:
   name: mosquitto-b
   namespace: default
 spec:
-  strategy:
-    type: Recreate
-    rollingUpdate: null
   selector:
     matchLabels:
       app: mosquitto
@@ -20,14 +17,16 @@ spec:
       automountServiceAccountToken: false
       affinity:
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - mosquitto
-            topologyKey: kubernetes.io/hostname
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - mosquitto
+              topologyKey: kubernetes.io/hostname
       containers:
       - args:
         - -c

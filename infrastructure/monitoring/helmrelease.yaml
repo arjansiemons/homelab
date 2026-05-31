@@ -72,6 +72,20 @@ spec:
                 path: /spec/ports/0/targetPort
                 value: metrics
           - target:
+              kind: DaemonSet
+              namespace: monitoring
+              name: kube-prometheus-stack-prometheus-node-exporter
+            patch: |
+              - op: replace
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 25m
+                    memory: 64Mi
+                  limits:
+                    cpu: 200m
+                    memory: 256Mi
+          - target:
               kind: ServiceAccount
               namespace: monitoring
               name: kube-prometheus-stack-alertmanager

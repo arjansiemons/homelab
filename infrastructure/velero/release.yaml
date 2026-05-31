@@ -54,7 +54,7 @@ spec:
               namespace: velero
               name: node-agent
             patch: |
-              - op: replace
+              - op: add
                 path: /spec/template/spec/containers/0/resources
                 value:
                   requests:

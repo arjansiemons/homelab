@@ -82,6 +82,12 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             failureThreshold: 6
+          livenessProbe:
+            tcpSocket:
+              port: 443
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            failureThreshold: 3
           securityContext:
             privileged: true  # Required: network stack needs host-level privileges
           volumeMounts:

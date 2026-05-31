@@ -29,6 +29,7 @@ spec:
               memory: 512Mi
           ports:
             - containerPort: 8000
+              name: http
           volumeMounts:
             - mountPath: /app/data
               name: zigbee2mqtt-data

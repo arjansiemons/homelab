@@ -6,7 +6,7 @@ metadata:
   namespace: default
   annotations:
     reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
-    reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "default,traefik,cattle-system"
+    reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "default,traefik,cattle-system,unifi-os"
 spec:
   secretName: local-siemons-it-nl-tls
   issuerRef:
@@ -19,6 +19,6 @@ spec:
   secretTemplate:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
-      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "default,traefik,cattle-system"
+      reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "default,traefik,cattle-system,unifi-os"
       reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
-      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "default,traefik,cattle-system"
+      reflector.v1.k8s.emberstack.com/reflection-auto-namespaces: "default,traefik,cattle-system,unifi-os"

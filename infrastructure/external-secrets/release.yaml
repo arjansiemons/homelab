@@ -38,6 +38,51 @@ spec:
         limits:
           cpu: 150m
           memory: 192Mi
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Deployment
+              namespace: external-secrets
+              name: external-secrets
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 50m
+                    memory: 128Mi
+                  limits:
+                    cpu: 250m
+                    memory: 256Mi
+          - target:
+              kind: Deployment
+              namespace: external-secrets
+              name: external-secrets-cert-controller
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 25m
+                    memory: 64Mi
+                  limits:
+                    cpu: 150m
+                    memory: 192Mi
+          - target:
+              kind: Deployment
+              namespace: external-secrets
+              name: external-secrets-webhook
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 25m
+                    memory: 64Mi
+                  limits:
+                    cpu: 150m
+                    memory: 192Mi
   install:
     createNamespace: true
     remediation:

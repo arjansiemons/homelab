@@ -56,3 +56,45 @@ spec:
               - op: replace
                 path: /spec/ports/0/targetPort
                 value: http-metrics
+          - target:
+              kind: Deployment
+              namespace: cert-manager
+              name: cert-manager
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 100m
+                    memory: 256Mi
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
+          - target:
+              kind: Deployment
+              namespace: cert-manager
+              name: cert-manager-cainjector
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 50m
+                    memory: 128Mi
+                  limits:
+                    cpu: 250m
+                    memory: 256Mi
+          - target:
+              kind: Deployment
+              namespace: cert-manager
+              name: cert-manager-webhook
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/resources
+                value:
+                  requests:
+                    cpu: 50m
+                    memory: 128Mi
+                  limits:
+                    cpu: 250m
+                    memory: 256Mi

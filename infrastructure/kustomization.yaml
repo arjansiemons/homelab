@@ -10,5 +10,6 @@ resources:
   - goldilocks/
   - metrics-server/
   - monitoring/
+  - networkpolicies/
   - network/cilium/
   - unifi-os/

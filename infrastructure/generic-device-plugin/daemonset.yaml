@@ -22,7 +22,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: generic-device-plugin
-          image: squat/generic-device-plugin
+          image: docker.io/squat/generic-device-plugin:0.2.0
           args:
             - --device
             - |

@@ -7,9 +7,14 @@ resources:
   - helmrelease-controller.yaml
   - external-secret.yaml
   - helmrelease-runner-set.yaml
+  - networkpolicy-arc-systems.yaml
+  - networkpolicy-arc-runners.yaml
+  - pdb-controller.yaml
+  - pdb-listener.yaml
+  - pdb-runners.yaml
 
 labels:
-  - includeSelectors: true
+  - includeSelectors: false
     pairs:
       app.kubernetes.io/managed-by: flux
       app.kubernetes.io/part-of: arc

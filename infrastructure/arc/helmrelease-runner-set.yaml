@@ -42,14 +42,55 @@ spec:
       spec:
         securityContext:
           fsGroup: 1001
+          runAsUser: 1001
+          runAsGroup: 1001
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
         containers:
           - name: runner
             image: ghcr.io/actions/actions-runner:2.334.0
             command:
               - /home/runner/run.sh
+            resources:
+              requests:
+                cpu: 250m
+                memory: 512Mi
+              limits:
+                cpu: "2"
+                memory: 2Gi
+            securityContext:
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
             env:
               - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
                 value: "false"
+    listenerTemplate:
+      spec:
+        securityContext:
+          runAsUser: 65532
+          runAsGroup: 65532
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        containers:
+          - name: listener
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+            securityContext:
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                  - ALL
         volumes:
           - name: work
             ephemeral:

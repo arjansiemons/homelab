@@ -29,6 +29,9 @@ spec:
               name: velero
             patch: |
               - op: replace
+                path: /spec/template/spec/containers/0/args/3
+                value: --keep-latest-maintenance-jobs=1
+              - op: replace
                 path: /spec/template/spec/containers/0/resources
                 value:
                   requests:

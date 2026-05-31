@@ -18,7 +18,7 @@ spec:
   ports:
     - name: webui
       port: 443
-      targetPort: 9443
+      targetPort: 443
       protocol: TCP
     - name: communication
       port: 8080

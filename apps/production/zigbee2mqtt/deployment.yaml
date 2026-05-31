@@ -17,6 +17,8 @@ spec:
       labels:
         app: zigbee2mqtt
     spec:
+      serviceAccountName: zigbee2mqtt
+      automountServiceAccountToken: false
       containers:
         - name: zigbee2mqtt
           image: koenkk/zigbee2mqtt:2.10.1

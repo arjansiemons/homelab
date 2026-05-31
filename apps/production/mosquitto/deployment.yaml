@@ -13,6 +13,8 @@ spec:
         app: mosquitto
         type: primary
     spec:
+      serviceAccountName: mosquitto
+      automountServiceAccountToken: false
       containers:
         - image: eclipse-mosquitto:2.0.22
           name: mosquitto

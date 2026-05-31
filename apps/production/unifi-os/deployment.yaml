@@ -17,6 +17,8 @@ spec:
         app.kubernetes.io/instance: unifi-os-server
         app.kubernetes.io/name: unifi-os-server
     spec:
+      serviceAccountName: unifi-os-server
+      automountServiceAccountToken: false
       containers:
         - name: unifi-os-server
           image: ghcr.io/lemker/unifi-os-server:v1.2.0

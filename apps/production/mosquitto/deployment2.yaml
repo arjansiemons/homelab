@@ -13,6 +13,8 @@ spec:
         app: mosquitto
         type: bridge
     spec:
+      serviceAccountName: mosquitto
+      automountServiceAccountToken: false
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -36,6 +38,16 @@ spec:
           name: mqtt
         - containerPort: 9001
           name: websocket
+        livenessProbe:
+          tcpSocket:
+            port: 1883
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          tcpSocket:
+            port: 1883
+          initialDelaySeconds: 5
+          periodSeconds: 10
         resources:
           requests:
             memory: "128Mi"

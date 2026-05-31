@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: default
 
 resources:
+  - serviceaccount.yaml
   - bridge.yaml
   - deployment.yaml
   - deployment2.yaml

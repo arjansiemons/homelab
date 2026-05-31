@@ -95,11 +95,11 @@ spec:
               subPath: rabbitmq
           resources:
             requests:
-              cpu: 1000m
-              memory: 2Gi
+              cpu: 15m
+              memory: 105M
             limits:
-              cpu: 4000m
-              memory: 8Gi
+              cpu: 15m
+              memory: 105M
       volumes:
         - name: unifi-os-storage
           persistentVolumeClaim:

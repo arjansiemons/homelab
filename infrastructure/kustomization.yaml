@@ -6,6 +6,7 @@ resources:
   - cert-manager/
   - cnpg/
   - external-secrets/
+  - goldilocks/
   - monitoring/
   - network/cilium/
   - unifi-os/

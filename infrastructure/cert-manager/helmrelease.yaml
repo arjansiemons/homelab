@@ -13,3 +13,22 @@ spec:
         name: cert-manager-repo
       version: v1.17.1
   interval: 1m0s
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Service
+              namespace: cert-manager
+              name: cert-manager
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: http-metrics
+          - target:
+              kind: Service
+              namespace: cert-manager
+              name: cert-manager-cainjector
+            patch: |
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: http-metrics

@@ -7,6 +7,7 @@ spec:
   selector:
     app: zigbee2mqtt
   type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
     - name: http
       port: 8000

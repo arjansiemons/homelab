@@ -48,3 +48,17 @@ spec:
     controller:
       flags:
         on-by-default: true
+  postRenderers:
+    - kustomize:
+        patches:
+          - target:
+              kind: Service
+              namespace: goldilocks
+              name: goldilocks-vpa-webhook
+            patch: |
+              - op: add
+                path: /spec/ports/0/name
+                value: https
+              - op: replace
+                path: /spec/ports/0/targetPort
+                value: http

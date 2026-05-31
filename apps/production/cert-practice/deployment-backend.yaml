@@ -32,6 +32,9 @@ spec:
         - name: backend
           image: "ghcr.io/arjansiemons/cert-practice-backend:1.7.1" # {"$imagepolicy": "flux-system:cert-practice-backend"}
           imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
           env:
             - name: DATABASE_URL
               valueFrom:

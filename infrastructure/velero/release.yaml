@@ -24,45 +24,10 @@ spec:
     - kustomize:
         patches:
           - target:
-              kind: Deployment
-              namespace: velero
-              name: velero
-            patch: |
-              - op: replace
-                path: /spec/template/spec/containers/0/args/3
-                value: --keep-latest-maintenance-jobs=1
-              - op: replace
-                path: /spec/template/spec/containers/0/resources
-                value:
-                  requests:
-                    cpu: 100m
-                    memory: 256Mi
-                  limits:
-                    cpu: 500m
-                    memory: 512Mi
-              - op: replace
-                path: /spec/template/spec/initContainers/0/resources
-                value:
-                  requests:
-                    cpu: 25m
-                    memory: 64Mi
-                  limits:
-                    cpu: 200m
-                    memory: 256Mi
-          - target:
               kind: DaemonSet
               namespace: velero
               name: node-agent
             patch: |
-              - op: add
-                path: /spec/template/spec/containers/0/resources
-                value:
-                  requests:
-                    cpu: 100m
-                    memory: 256Mi
-                  limits:
-                    cpu: 500m
-                    memory: 512Mi
               - op: add
                 path: /spec/template/spec/containers/0/livenessProbe
                 value:
@@ -96,10 +61,24 @@ spec:
       image:
         repository: docker.io/bitnami/kubectl
         tag: latest
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
     initContainers:
       - name: velero-plugin-for-aws
         image: velero/velero-plugin-for-aws:v1.14.1
         imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 25m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
         volumeMounts:
           - name: plugins
             mountPath: /target
@@ -122,4 +101,21 @@ spec:
             key: cloud
           config:
             region: ${B2_REGION}
+      repositoryMaintenanceJob:
+        repositoryConfigData:
+          global:
+            podResources:
+              cpuRequest: 100m
+              cpuLimit: 500m
+              memoryRequest: 256Mi
+              memoryLimit: 512Mi
+            keepLatestMaintenanceJobs: 1
     deployNodeAgent: true
+    nodeAgent:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi

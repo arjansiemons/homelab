@@ -71,6 +71,22 @@ spec:
               - op: replace
                 path: /spec/ports/0/targetPort
                 value: metrics
+          - target:
+              kind: ServiceAccount
+              namespace: monitoring
+              name: kube-prometheus-stack-alertmanager
+            patch: |
+              - op: add
+                path: /automountServiceAccountToken
+                value: false
+          - target:
+              kind: ServiceAccount
+              namespace: monitoring
+              name: kube-prometheus-stack-grafana
+            patch: |
+              - op: add
+                path: /automountServiceAccountToken
+                value: false
   values:
     prometheusOperator:
       prometheusConfigReloader:

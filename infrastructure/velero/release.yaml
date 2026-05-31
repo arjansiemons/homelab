@@ -102,14 +102,13 @@ spec:
           config:
             region: ${B2_REGION}
       repositoryMaintenanceJob:
-        repositoryConfigData:
-          global:
-            podResources:
-              cpuRequest: 100m
-              cpuLimit: 500m
-              memoryRequest: 256Mi
-              memoryLimit: 512Mi
-            keepLatestMaintenanceJobs: 1
+        requests:
+          cpu: 100m
+          memory: 256Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi
+        latestJobsCount: 1
     deployNodeAgent: true
     nodeAgent:
       resources:

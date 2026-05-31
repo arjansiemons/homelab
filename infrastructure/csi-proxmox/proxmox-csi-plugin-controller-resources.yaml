@@ -10,6 +10,11 @@ spec:
       app.kubernetes.io/instance: proxmox-csi-plugin
       app.kubernetes.io/name: proxmox-csi-plugin
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: proxmox-csi-plugin
+        app.kubernetes.io/name: proxmox-csi-plugin
     spec:
       containers:
         - name: proxmox-csi-plugin-controller

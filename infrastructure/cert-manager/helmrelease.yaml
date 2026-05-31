@@ -98,3 +98,37 @@ spec:
                   limits:
                     cpu: 250m
                     memory: 256Mi
+          - target:
+              kind: Deployment
+              namespace: cert-manager
+              name: cert-manager
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/readinessProbe
+                value:
+                  tcpSocket:
+                    port: 9402
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 2
+          - target:
+              kind: Deployment
+              namespace: cert-manager
+              name: cert-manager-cainjector
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/livenessProbe
+                value:
+                  tcpSocket:
+                    port: 9402
+                  initialDelaySeconds: 10
+                  periodSeconds: 20
+                  timeoutSeconds: 2
+              - op: add
+                path: /spec/template/spec/containers/0/readinessProbe
+                value:
+                  tcpSocket:
+                    port: 9402
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 2

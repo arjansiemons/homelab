@@ -83,6 +83,53 @@ spec:
                   limits:
                     cpu: 150m
                     memory: 192Mi
+          - target:
+              kind: Deployment
+              namespace: external-secrets
+              name: external-secrets
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/livenessProbe
+                value:
+                  tcpSocket:
+                    port: 8080
+                  initialDelaySeconds: 10
+                  periodSeconds: 20
+                  timeoutSeconds: 2
+              - op: add
+                path: /spec/template/spec/containers/0/readinessProbe
+                value:
+                  tcpSocket:
+                    port: 8080
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  timeoutSeconds: 2
+          - target:
+              kind: Deployment
+              namespace: external-secrets
+              name: external-secrets-cert-controller
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/livenessProbe
+                value:
+                  tcpSocket:
+                    port: 8080
+                  initialDelaySeconds: 10
+                  periodSeconds: 20
+                  timeoutSeconds: 2
+          - target:
+              kind: Deployment
+              namespace: external-secrets
+              name: external-secrets-webhook
+            patch: |
+              - op: add
+                path: /spec/template/spec/containers/0/livenessProbe
+                value:
+                  tcpSocket:
+                    port: 8080
+                  initialDelaySeconds: 10
+                  periodSeconds: 20
+                  timeoutSeconds: 2
   install:
     createNamespace: true
     remediation:

@@ -24,7 +24,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: blog
-          image: ghcr.io/arjansiemons/hugo-site:latest # {"$imagepolicy": "flux-system:blog"}
+          image: ghcr.io/arjansiemons/hugo-site@sha256:7a5a338c8789e5d653db6d8655ba84e5069c787eb90504b059e7217d9a345693 # {"$imagepolicy": "flux-system:blog"}
           imagePullPolicy: Always
           ports:
             - name: http

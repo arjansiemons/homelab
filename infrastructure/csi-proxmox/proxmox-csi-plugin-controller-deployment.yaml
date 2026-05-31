@@ -1,0 +1,214 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxmox-csi-plugin-controller
+  namespace: csi-proxmox
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: proxmox-csi-plugin
+    app.kubernetes.io/name: proxmox-csi-plugin
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: controller
+      app.kubernetes.io/instance: proxmox-csi-plugin
+      app.kubernetes.io/name: proxmox-csi-plugin
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: proxmox-csi-plugin
+        app.kubernetes.io/name: proxmox-csi-plugin
+    spec:
+      enableServiceLinks: false
+      priorityClassName: system-cluster-critical
+      serviceAccountName: proxmox-csi-plugin-controller
+      securityContext:
+        fsGroup: 65532
+        fsGroupChangePolicy: OnRootMismatch
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65532
+      containers:
+        - name: proxmox-csi-plugin-controller
+          image: ghcr.io/sergelogvinov/proxmox-csi-controller:v0.18.1
+          imagePullPolicy: IfNotPresent
+          args:
+            - -v=5
+            - --csi-address=unix:///csi/csi.sock
+            - --cloud-config=/etc/proxmox/config.yaml
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+            - name: cloud-config
+              mountPath: /etc/proxmox/
+        - name: csi-attacher
+          image: registry.k8s.io/sig-storage/csi-attacher:v4.4.4
+          imagePullPolicy: IfNotPresent
+          args:
+            - -v=5
+            - --csi-address=unix:///csi/csi.sock
+            - --timeout=3m
+            - --leader-election
+            - --default-fstype=ext4
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-provisioner
+          image: registry.k8s.io/sig-storage/csi-provisioner:v3.6.4
+          imagePullPolicy: IfNotPresent
+          args:
+            - -v=5
+            - --csi-address=unix:///csi/csi.sock
+            - --timeout=3m
+            - --leader-election
+            - --default-fstype=ext4
+            - --feature-gates=Topology=True
+            - --enable-capacity
+            - --capacity-ownerref-level=2
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-resizer
+          image: registry.k8s.io/sig-storage/csi-resizer:v1.9.4
+          imagePullPolicy: IfNotPresent
+          args:
+            - -v=5
+            - --csi-address=unix:///csi/csi.sock
+            - --timeout=3m
+            - --handle-volume-inuse-error=false
+            - --leader-election
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: liveness-probe
+          image: registry.k8s.io/sig-storage/livenessprobe:v2.11.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - -v=5
+            - --csi-address=unix:///csi/csi.sock
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+        - name: csi-snapshotter
+          image: registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - -v=5
+            - --csi-address=unix:///csi/csi.sock
+            - --timeout=3m
+            - --leader-election
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: socket-dir
+              mountPath: /csi
+      volumes:
+        - name: socket-dir
+          emptyDir: {}
+        - name: cloud-config
+          secret:
+            secretName: proxmox-csi-plugin

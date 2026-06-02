@@ -84,7 +84,6 @@ spec:
             mountPath: /target
     configuration:
       features: EnableCSI
-      defaultRepoMaintainFrequency: 24h
       backupStorageLocation:
         - name: default
           default: true
@@ -110,6 +109,8 @@ spec:
           cpu: 500m
           memory: 512Mi
         latestJobsCount: 1
+      extraArgs:
+        - --default-repo-maintain-frequency=24h
     deployNodeAgent: true
     nodeAgent:
       resources:

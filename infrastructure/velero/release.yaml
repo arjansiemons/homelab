@@ -84,6 +84,7 @@ spec:
             mountPath: /target
     configuration:
       features: EnableCSI
+      defaultRepoMaintainFrequency: 24h
       backupStorageLocation:
         - name: default
           default: true

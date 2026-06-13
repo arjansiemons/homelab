@@ -20,6 +20,9 @@ spec:
     additionalArguments:
       - --serversTransport.insecureSkipVerify=true
       - --log.level=INFO
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
     deployment:
       enabled: true
       replicas: 3
@@ -61,5 +64,7 @@ spec:
         enabled: true
   install:
     crds: Create
+    timeout: 2m
   upgrade:
     crds: CreateReplace
+    timeout: 2m

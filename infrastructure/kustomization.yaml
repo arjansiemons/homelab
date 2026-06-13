@@ -13,4 +13,5 @@ resources:
   - monitoring/
   - networkpolicies/
   - network/cilium/
+  - traefik/
   - unifi-os/

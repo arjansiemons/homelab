@@ -47,6 +47,8 @@ spec:
         redirectTo:
           port: websecure
       websecure:
+        expose:
+          default: true
         tls:
           enabled: true
         http3:

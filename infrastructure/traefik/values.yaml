@@ -1,0 +1,52 @@
+globalArguments:
+  - --global.sendanonymoususage=false
+  - --global.checknewversion=false
+
+additionalArguments:
+  - --serversTransport.insecureSkipVerify=true
+  - --log.level=INFO
+
+deployment:
+  enabled: true
+  replicas: 3
+  podAnnotations: {}
+  additionalContainers: []
+  initContainers: []
+  annotations: {}
+
+rbac:
+  enabled: true
+
+service:
+  type: LoadBalancer
+  enabled: true
+  spec: {}
+  labels: {}
+  annotations:
+    lbipam.cilium.io/ips: 192.168.2.68
+  externalIPs: []
+  loadBalancerSourceRanges: []
+
+ports:
+  web:
+    redirectTo:
+      port: websecure
+  websecure:
+    tls:
+      enabled: true
+    http3:
+      enabled: true
+
+providers:
+  kubernetesCRD:
+    enabled: true
+    allowExternalNameServices: true
+  kubernetesIngress:
+    enabled: true
+    publishedService:
+      enabled: false
+    allowExternalNameServices: true
+
+ingressRoute:
+  dashboard:
+    enabled: true

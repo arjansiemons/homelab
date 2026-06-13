@@ -1,0 +1,65 @@
+apiVersion: helm.toolkit.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  interval: 10m
+  chart:
+    spec:
+      chart: traefik
+      version: "32.1.1"
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: traefik
+  values:
+    globalArguments:
+      - --global.sendanonymoususage=false
+      - --global.checknewversion=false
+    additionalArguments:
+      - --serversTransport.insecureSkipVerify=true
+      - --log.level=INFO
+    deployment:
+      enabled: true
+      replicas: 3
+      podAnnotations: {}
+      additionalContainers: []
+      initContainers: []
+      annotations: {}
+    rbac:
+      enabled: true
+    service:
+      type: LoadBalancer
+      enabled: true
+      spec: {}
+      labels: {}
+      annotations:
+        lbipam.cilium.io/ips: 192.168.2.68
+      externalIPs: []
+      loadBalancerSourceRanges: []
+    ports:
+      web:
+        redirectTo:
+          port: websecure
+      websecure:
+        tls:
+          enabled: true
+        http3:
+          enabled: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowExternalNameServices: true
+      kubernetesIngress:
+        enabled: true
+        publishedService:
+          enabled: false
+        allowExternalNameServices: true
+    ingressRoute:
+      dashboard:
+        enabled: true
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace

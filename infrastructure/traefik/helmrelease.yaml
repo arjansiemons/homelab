@@ -35,12 +35,11 @@ spec:
     service:
       type: LoadBalancer
       enabled: true
-      single: false
+      single: true
       spec: {}
       labels: {}
       annotations:
         lbipam.cilium.io/ips: 192.168.2.68
-        lbipam.cilium.io/sharing-key: traefik-http3
       externalIPs: []
       loadBalancerSourceRanges: []
     ports:

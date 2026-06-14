@@ -35,7 +35,7 @@ spec:
     service:
       type: LoadBalancer
       enabled: true
-      single: true
+      single: false
       spec: {}
       labels: {}
       annotations:

@@ -7,6 +7,8 @@ spec:
   suspend: false
   targetNamespace: kube-system
   interval: 1h
+  install:
+    replace: true
   upgrade:
     force: true
   postRenderers:

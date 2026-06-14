@@ -53,7 +53,6 @@ spec:
           enabled: true
         http3:
           enabled: true
-          advertisedPort: 4443
     providers:
       kubernetesCRD:
         enabled: true

@@ -35,13 +35,15 @@ spec:
     service:
       type: LoadBalancer
       enabled: true
-      single: false
+      single: true
       spec: {}
       labels: {}
-      annotationsTCP:
+      annotations:
         lbipam.cilium.io/ips: 192.168.2.68
-      annotationsUDP:
-        lbipam.cilium.io/ips: 192.168.2.69
+      # annotationsTCP:
+      #   lbipam.cilium.io/ips: 192.168.2.68
+      # annotationsUDP:
+      #   lbipam.cilium.io/ips: 192.168.2.69
       externalIPs: []
       loadBalancerSourceRanges: []
     ports:

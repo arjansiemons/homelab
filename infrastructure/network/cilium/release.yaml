@@ -120,7 +120,6 @@ spec:
       enabled: true
     externalIPs:
       enabled: true
-    enableCiliumEndpointSlice: true
     loadBalancer:
       algorithm: maglev
     gatewayAPI:

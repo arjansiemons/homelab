@@ -47,6 +47,9 @@ spec:
         redirectTo:
           port: websecure
       websecure:
+        protocol: TCP
+        port: 8443
+        exposedPort: 443
         expose:
           default: true
         tls:

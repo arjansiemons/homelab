@@ -38,8 +38,10 @@ spec:
       single: false
       spec: {}
       labels: {}
-      annotations:
+      annotationsTCP:
         lbipam.cilium.io/ips: 192.168.2.68
+      annotationsUDP:
+        lbipam.cilium.io/ips: 192.168.2.69
       externalIPs: []
       loadBalancerSourceRanges: []
     ports:

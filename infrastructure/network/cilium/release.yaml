@@ -4,7 +4,7 @@ metadata:
   name: cilium
   namespace: cilium-system
 spec:
-  suspend: true
+  suspend: false
   interval: 1h
   postRenderers:
     - kustomize:

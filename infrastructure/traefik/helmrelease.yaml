@@ -51,7 +51,6 @@ spec:
               scheme: https
               permanent: true
       websecure:
-        protocol: TCP
         exposedPort: 443
         expose:
           default: true

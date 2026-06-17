@@ -10,6 +10,7 @@ resources:
   - np-kube-system.yaml
   - np-monitoring.yaml
   - np-n8n.yaml
+  - resourcequota-default.yaml
 
 labels:
   - includeSelectors: false

@@ -11,3 +11,4 @@ resources:
   - external-secret-host.yaml
   - external-secret-baseurl.yaml
   - cloudflared.yaml
+  - pdb.yaml

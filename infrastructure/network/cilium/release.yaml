@@ -119,8 +119,8 @@ spec:
         cpu: 200m
         memory: 512Mi
     k8sClientRateLimit:
-      qps: 20
-      burst: 100
+      qps: 50
+      burst: 200
     l2announcements:
       enabled: true
     externalIPs:
@@ -140,8 +140,7 @@ spec:
         enabled: true
         rollOutPods: true
       ui:
-        enabled: true
-        rollOutPods: true
+        enabled: false
     ingressController:
       enabled: false
       default: true

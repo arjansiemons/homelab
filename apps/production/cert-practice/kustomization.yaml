@@ -11,6 +11,7 @@ resources:
   - service-frontend.yaml
   - ingress.yaml
   - external-secret.yaml
+  - pdb.yaml
 
 commonLabels:
   app.kubernetes.io/instance: cert-practice

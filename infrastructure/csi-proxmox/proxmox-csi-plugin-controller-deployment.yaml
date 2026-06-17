@@ -69,7 +69,7 @@ spec:
           args:
             - -v=5
             - --csi-address=unix:///csi/csi.sock
-            - --timeout=3m
+            - --timeout=30s
             - --leader-election
             - --default-fstype=ext4
           resources:
@@ -96,7 +96,7 @@ spec:
           args:
             - -v=5
             - --csi-address=unix:///csi/csi.sock
-            - --timeout=3m
+            - --timeout=30s
             - --leader-election
             - --default-fstype=ext4
             - --feature-gates=Topology=True
@@ -135,7 +135,7 @@ spec:
           args:
             - -v=5
             - --csi-address=unix:///csi/csi.sock
-            - --timeout=3m
+            - --timeout=30s
             - --handle-volume-inuse-error=false
             - --leader-election
           resources:
@@ -186,7 +186,7 @@ spec:
           args:
             - -v=5
             - --csi-address=unix:///csi/csi.sock
-            - --timeout=3m
+            - --timeout=30s
             - --leader-election
           resources:
             requests:

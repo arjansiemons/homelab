@@ -1,0 +1,25 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: cert-practice-backend
+  namespace: default
+spec:
+  maxUnavailable: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cert-practice
+      app.kubernetes.io/instance: cert-practice
+      app.kubernetes.io/component: backend
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: cert-practice-frontend
+  namespace: default
+spec:
+  maxUnavailable: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cert-practice
+      app.kubernetes.io/instance: cert-practice
+      app.kubernetes.io/component: frontend

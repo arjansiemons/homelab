@@ -8,6 +8,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+  - pdb.yaml
 
 commonLabels:
   app.kubernetes.io/instance: mealie

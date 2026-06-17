@@ -65,7 +65,7 @@ spec:
               memory: "400Mi"
               cpu: "25m"
             limits:
-              memory: "512Mi"
+              memory: "1Gi"
               cpu: "500m"
           volumeMounts:
             - name: api-data

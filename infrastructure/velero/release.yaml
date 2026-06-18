@@ -90,7 +90,7 @@ spec:
           provider: aws
           bucket: ${B2_BUCKET_NAME}
           config:
-            region: us-east-1
+            region: ${B2_REGION}
             s3Url: https://${B2_S3_URL}
             s3ForcePathStyle: "true"
       volumeSnapshotLocation:
@@ -100,7 +100,7 @@ spec:
             name: velero-b2-credentials
             key: cloud
           config:
-            region: us-east-1
+            region: ${B2_REGION}
       repositoryMaintenanceJob:
         requests:
           cpu: 100m

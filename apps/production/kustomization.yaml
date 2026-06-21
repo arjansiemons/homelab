@@ -8,5 +8,4 @@ resources:
   - mealie
   - mosquitto
   - n8n
-  - unifi-os
   - zigbee2mqtt

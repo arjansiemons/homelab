@@ -14,4 +14,3 @@ resources:
   - networkpolicies/
   - network/cilium/
   - traefik/
-  - unifi-os/

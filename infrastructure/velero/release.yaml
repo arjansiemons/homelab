@@ -70,7 +70,7 @@ spec:
         memory: 512Mi
     initContainers:
       - name: velero-plugin-for-aws
-        image: velero/velero-plugin-for-aws:v1.14.1
+        image: velero/velero-plugin-for-aws:v1.14.2
         imagePullPolicy: IfNotPresent
         resources:
           requests:

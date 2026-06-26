@@ -18,14 +18,23 @@ spec:
             summary: Velero backup failures detected
             description: Velero reported at least one failed backup in the last 30 minutes.
 
-        - alert: VeleroNoBackupAttempts24h
-          expr: increase(velero_backup_attempt_total[24h]) == 0
+        - alert: VeleroNoDailyBackup
+          expr: increase(velero_backup_attempt_total{schedule="pvc-full-daily"}[25h]) == 0
           for: 15m
           labels:
             severity: critical
           annotations:
-            summary: Velero has not attempted backups in 24h
-            description: No Velero backup attempts were observed in the last 24 hours.
+            summary: Velero daily backup has not been attempted in 25h
+            description: No Velero daily backup attempts were observed in the last 25 hours.
+
+        - alert: VeleroNoWeeklyBackup
+          expr: increase(velero_backup_attempt_total{schedule="pvc-full-weekly-archive"}[8d]) == 0
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: Velero weekly backup has not been attempted in 8 days
+            description: No Velero weekly backup attempts were observed in the last 8 days.
 
         - alert: VeleroLastBackupStatusFailed
           expr: max_over_time(velero_backup_last_status[30m]) == 0

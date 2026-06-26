@@ -89,6 +89,7 @@ spec:
           default: true
           provider: aws
           bucket: ${B2_BUCKET_NAME}
+          prefix: velero
           config:
             region: ${B2_REGION}
             s3Url: https://${B2_S3_URL}

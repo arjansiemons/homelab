@@ -83,7 +83,7 @@ spec:
                     cpu: 25m
                     memory: 64Mi
                   limits:
-                    cpu: 200m
+                    cpu: 300m
                     memory: 256Mi
           - target:
               kind: ServiceAccount

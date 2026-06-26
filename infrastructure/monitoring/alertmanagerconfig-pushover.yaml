@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: pushover
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  route:
+    receiver: pushover
+    matchers:
+      - name: alertname
+        matchType: "!="
+        value: Watchdog
+      - name: alertname
+        matchType: "!="
+        value: InfoInhibitor
+    groupBy:
+      - alertname
+      - namespace
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 4h
+  receivers:
+    - name: pushover
+      pushoverConfigs:
+        - userKey:
+            name: alertmanager-pushover
+            key: user-key
+          token:
+            name: alertmanager-pushover
+            key: app-token
+          title: '{{ template "pushover.default.title" . }}'
+          message: '{{ template "pushover.default.message" . }}'
+          url: '{{ template "pushover.default.url" . }}'
+          priority: |-
+            {{ if eq .CommonLabels.severity "critical" }}1{{ else }}0{{ end }}
+          retry: 1m
+          expire: 1h
+          sendResolved: true

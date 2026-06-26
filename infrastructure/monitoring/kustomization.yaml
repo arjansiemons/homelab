@@ -11,6 +11,8 @@ resources:
   - grafana-dashboard-backups.yaml
   - grafana-dashboard-velero-integration.yaml
   - velero-integration-snippets.yaml
+  - external-secret-pushover.yaml
+  - alertmanagerconfig-pushover.yaml
 
 labels:
   - includeSelectors: true

@@ -35,6 +35,4 @@ spec:
           url: '{{ template "pushover.default.url" . }}'
           priority: |-
             {{ if eq .CommonLabels.severity "critical" }}1{{ else }}0{{ end }}
-          retry: 1m
-          expire: 1h
           sendResolved: true

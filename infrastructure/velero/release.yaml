@@ -94,6 +94,7 @@ spec:
             region: ${B2_REGION}
             s3Url: https://${B2_S3_URL}
             s3ForcePathStyle: "true"
+            checksumAlgorithm: ""
       volumeSnapshotLocation:
         - name: default
           provider: aws

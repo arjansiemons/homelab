@@ -83,7 +83,7 @@ spec:
                     cpu: 25m
                     memory: 64Mi
                   limits:
-                    cpu: 300m
+                    cpu: 500m
                     memory: 256Mi
           - target:
               kind: ServiceAccount
@@ -177,6 +177,7 @@ spec:
     grafana:
       deploymentStrategy:
         type: Recreate
+        rollingUpdate: null
       resources:
         requests:
           cpu: 100m

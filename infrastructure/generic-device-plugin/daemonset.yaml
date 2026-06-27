@@ -40,7 +40,7 @@ spec:
               cpu: 50m
               memory: 10Mi
             limits:
-              cpu: 100m
+              cpu: 200m
               memory: 20Mi
           securityContext:
             privileged: true

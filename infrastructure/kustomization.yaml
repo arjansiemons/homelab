@@ -7,7 +7,6 @@ resources:
   - csi-proxmox/
   - cnpg/
   - external-secrets/
-  - generic-device-plugin/
   - goldilocks/
   - metrics-server/
   - monitoring/

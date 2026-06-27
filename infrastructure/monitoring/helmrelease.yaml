@@ -175,9 +175,6 @@ spec:
             hosts:
               - alertmanager.local.siemons-it.nl
     grafana:
-      deploymentStrategy:
-        type: Recreate
-        rollingUpdate: null
       resources:
         requests:
           cpu: 100m

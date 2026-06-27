@@ -83,7 +83,7 @@ spec:
                     cpu: 25m
                     memory: 64Mi
                   limits:
-                    cpu: 500m
+                    cpu: 1000m
                     memory: 256Mi
           - target:
               kind: ServiceAccount
@@ -196,7 +196,7 @@ spec:
             cpu: 10m
             memory: 64Mi
           limits:
-            cpu: 100m
+            cpu: 500m
             memory: 128Mi
         dashboards:
           enabled: true

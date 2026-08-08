@@ -21,7 +21,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: zigbee2mqtt
-          image: koenkk/zigbee2mqtt:2.12.1
+          image: koenkk/zigbee2mqtt:2.13.0
           resources:
             requests:
               cpu: 15m

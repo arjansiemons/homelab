@@ -40,7 +40,7 @@ spec:
           effect: NoSchedule
       containers:
         - name: proxmox-csi-plugin-node
-          image: ghcr.io/sergelogvinov/proxmox-csi-node:v0.19.1
+          image: ghcr.io/sergelogvinov/proxmox-csi-node:v0.20.0
           imagePullPolicy: IfNotPresent
           args:
             - -v=5

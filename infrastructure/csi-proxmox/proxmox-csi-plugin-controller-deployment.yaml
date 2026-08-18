@@ -37,7 +37,7 @@ spec:
         runAsUser: 65532
       containers:
         - name: proxmox-csi-plugin-controller
-          image: ghcr.io/sergelogvinov/proxmox-csi-controller:v0.19.1
+          image: ghcr.io/sergelogvinov/proxmox-csi-controller:v0.20.0
           imagePullPolicy: IfNotPresent
           args:
             - -v=5

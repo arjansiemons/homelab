@@ -188,6 +188,18 @@ spec:
       enabled: false
     kubeScheduler:
       enabled: false
+    # Cuts ~42k of the ~60k apiserver series (measured via /api/v1/status/tsdb) and
+    # halves apiserver/kubelet scrape cost — not needed at homelab scale/retention.
+    kubeApiServer:
+      serviceMonitor:
+        interval: 60s
+        metricRelabelings:
+          - sourceLabels: [__name__]
+            regex: "apiserver_request_body_size_bytes_bucket|apiserver_request_sli_duration_seconds_bucket|apiserver_response_sizes_bucket|apiserver_watch_list_duration_seconds_bucket|apiserver_watch_cache_read_wait_seconds_bucket|apiserver_watch_events_sizes_bucket|etcd_request_duration_seconds_bucket"
+            action: drop
+    kubelet:
+      serviceMonitor:
+        interval: 60s
     alertmanager:
       alertmanagerSpec:
         resources:

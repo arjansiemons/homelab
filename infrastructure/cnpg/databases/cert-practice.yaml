@@ -25,7 +25,7 @@ spec:
     retentionPolicy: "14d"
   storage:
     size: 5Gi
-    storageClass: proxmox-csi
+    storageClass: proxmox-csi-nvme
   bootstrap:
     initdb:
       database: cert_practice

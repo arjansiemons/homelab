@@ -262,7 +262,7 @@ spec:
               - grafana.local.siemons-it.nl
       persistence:
         enabled: true
-        storageClassName: proxmox-csi
+        storageClassName: proxmox-csi-nvme
         accessModes:
           - ReadWriteOnce
         size: 5Gi

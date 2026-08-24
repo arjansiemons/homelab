@@ -33,7 +33,7 @@ spec:
               cpu: 50m
               memory: 64Mi
             limits:
-              cpu: 200m
+              cpu: 500m
               memory: 128Mi
           livenessProbe:
             tcpSocket:
@@ -65,3 +65,13 @@ spec:
                     operator: In
                     values: [mosquitto]
               topologyKey: kubernetes.io/hostname
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values: [zigbee2mqtt]
+                topologyKey: kubernetes.io/hostname

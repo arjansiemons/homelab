@@ -6,8 +6,8 @@ resources:
   - cert-manager/
   - csi-proxmox/
   - cnpg/
+  - descheduler/
   - external-secrets/
-  - goldilocks/
   - metrics-server/
   - monitoring/
   - networkpolicies/

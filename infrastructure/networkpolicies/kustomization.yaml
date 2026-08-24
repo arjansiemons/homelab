@@ -6,7 +6,6 @@ resources:
   - np-cert-manager.yaml
   - np-default.yaml
   - np-external-secrets.yaml
-  - np-goldilocks.yaml
   - np-kube-system.yaml
   - np-monitoring.yaml
   - np-n8n.yaml

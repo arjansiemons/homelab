@@ -290,7 +290,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: proxmox-csi
+              storageClassName: proxmox-csi-nvme
               accessModes:
                 - ReadWriteOnce
               resources:

@@ -9,7 +9,5 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClassName: proxmox-csi
+  storageClassName: proxmox-csi-nvme
   volumeMode: Filesystem
-  volumeName: pvc-d61c134b-8b86-4e5a-8791-21a8242d6be2
-  

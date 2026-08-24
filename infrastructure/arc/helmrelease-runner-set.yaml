@@ -32,7 +32,7 @@ spec:
     containerMode:
       type: kubernetes
       kubernetesModeWorkVolumeClaim:
-        storageClassName: proxmox-csi
+        storageClassName: proxmox-csi-nvme
         accessModes:
           - ReadWriteOnce
         resources:
@@ -96,7 +96,7 @@ spec:
             ephemeral:
               volumeClaimTemplate:
                 spec:
-                  storageClassName: proxmox-csi
+                  storageClassName: proxmox-csi-nvme
                   accessModes:
                     - ReadWriteOnce
                   resources:

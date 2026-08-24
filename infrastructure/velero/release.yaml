@@ -15,7 +15,7 @@ spec:
   chart:
     spec:
       chart: velero
-      version: "8.1.x"
+      version: "12.1.x"
       sourceRef:
         kind: HelmRepository
         name: velero

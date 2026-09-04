@@ -11,6 +11,7 @@ resources:
   - networkpolicy-baseline.yaml
   - backups/external-secret-b2.yaml
   - backups/scheduled-backups.yaml
+  - databases/apple-health-lake.yaml
   - databases/cert-practice.yaml
   - databases/n8n.yaml
 

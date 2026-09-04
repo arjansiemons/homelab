@@ -1,6 +1,17 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
+  name: apple-health-lake-postgres-daily
+  namespace: postgresql-system
+spec:
+  schedule: "15 2 * * *"
+  backupOwnerReference: self
+  cluster:
+    name: apple-health-lake-postgres
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
   name: n8n-postgres-daily
   namespace: postgresql-system
 spec:

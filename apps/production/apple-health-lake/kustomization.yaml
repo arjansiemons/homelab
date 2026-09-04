@@ -2,9 +2,13 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - serviceaccount.yaml
+  - serviceaccount-cloudflared.yaml
   - deployment.yaml
+  - deployment-mcpserver.yaml
   - service.yaml
-  - pvc.yaml
+  - service-mcpserver.yaml
   - ingress.yaml
   - external-secret.yaml
+  - external-secret-cloudflared.yaml
+  - cloudflared.yaml
   - pdb.yaml

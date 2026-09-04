@@ -1,0 +1,32 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: apple-health-lake-postgres
+  namespace: postgresql-system
+spec:
+  instances: 2  # Keep one replica so the generated -ro service always has endpoints
+  imageName: ghcr.io/cloudnative-pg/postgresql:16
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://homelab-backups-prod/cnpg/apple-health-lake-postgres
+      endpointURL: https://s3.eu-central-003.backblazeb2.com
+      s3Credentials:
+        accessKeyId:
+          name: cnpg-backup-b2-credentials
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: cnpg-backup-b2-credentials
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+        maxParallel: 4
+      data:
+        compression: gzip
+    retentionPolicy: "14d"
+  storage:
+    size: 5Gi
+    storageClass: proxmox-csi-nvme
+  bootstrap:
+    initdb:
+      database: apple_health
+      owner: applehealthlake

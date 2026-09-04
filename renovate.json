@@ -25,6 +25,14 @@
         "description": "Ignore own images managed by Flux ImageUpdateAutomation",
         "matchPackageNames": ["ghcr.io/arjansiemons/**"],
         "enabled": false
+      },
+      {
+        "description": "apple-health-lake: Flux ImageUpdateAutomation is suspended for this app (private registry), Renovate manages its image tags instead",
+        "matchPackageNames": [
+          "ghcr.io/arjansiemons/apple-health-lake",
+          "ghcr.io/arjansiemons/apple-health-lake-mcp"
+        ],
+        "enabled": true
       }
     ]
   }

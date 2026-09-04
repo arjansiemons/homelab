@@ -10,3 +10,16 @@ spec:
       app.kubernetes.io/name: apple-health-lake
       app.kubernetes.io/instance: apple-health-lake
       app.kubernetes.io/component: ingester
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: apple-health-lake-mcp
+  namespace: default
+spec:
+  maxUnavailable: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: apple-health-lake
+      app.kubernetes.io/instance: apple-health-lake
+      app.kubernetes.io/component: mcp-server

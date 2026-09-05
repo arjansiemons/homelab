@@ -30,7 +30,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: ingester
-          image: "ghcr.io/arjansiemons/apple-health-lake:0.5.0" # {"$imagepolicy": "flux-system:apple-health-lake"}
+          image: "ghcr.io/arjansiemons/apple-health-lake:0.5.1" # {"$imagepolicy": "flux-system:apple-health-lake"}
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false

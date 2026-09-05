@@ -10,5 +10,6 @@ resources:
   - ingress.yaml
   - external-secret.yaml
   - external-secret-cloudflared.yaml
+  - configmap-cloudflared.yaml
   - cloudflared.yaml
   - pdb.yaml

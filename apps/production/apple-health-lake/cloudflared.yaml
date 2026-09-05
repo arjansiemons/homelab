@@ -40,18 +40,9 @@ spec:
             - cloudflared
             - tunnel
             - --no-autoupdate
-            - --metrics
-            - 0.0.0.0:2000
+            - --config
+            - /etc/cloudflared/config.yaml
             - run
-          args:
-            - --token
-            - "$(CF_TOKEN)"
-          env:
-            - name: CF_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: apple-health-lake-cloudflared-token
-                  key: token
           resources:
             requests:
               memory: "64Mi"
@@ -73,3 +64,17 @@ spec:
             failureThreshold: 1
             initialDelaySeconds: 10
             periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /etc/cloudflared
+              readOnly: true
+            - name: creds
+              mountPath: /etc/cloudflared/creds
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: apple-health-lake-cloudflared-config
+        - name: creds
+          secret:
+            secretName: apple-health-lake-cloudflared-credentials

@@ -36,6 +36,7 @@ spec:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: false
             runAsNonRoot: true
+            runAsUser: 65532 # distroless "nonroot" image uses a non-numeric user; kubelet can't verify non-root without a numeric UID
             capabilities:
               drop: ["ALL"]
           env:

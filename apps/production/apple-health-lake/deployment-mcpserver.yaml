@@ -30,7 +30,7 @@ spec:
       enableServiceLinks: true
       containers:
         - name: mcp-server
-          image: "ghcr.io/arjansiemons/apple-health-lake-mcp:0.5.1"
+          image: "ghcr.io/arjansiemons/apple-health-lake-mcp:0.6.0"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false

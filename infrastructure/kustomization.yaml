@@ -8,6 +8,7 @@ resources:
   - cnpg/
   - descheduler/
   - external-secrets/
+  - longhorn/
   - metrics-server/
   - monitoring/
   - networkpolicies/

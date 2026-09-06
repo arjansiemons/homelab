@@ -4,7 +4,7 @@ metadata:
   name: cert-practice-postgres
   namespace: postgresql-system
 spec:
-  instances: 3  # 3+ instances lets CNPG evict a replica cleanly during node drains (2 instances blocks it, see docs)
+  instances: 2  # temporarily 2: only 2 nodes have nvme-k8s storage right now (work-02 removed). Bump back to 3 once pve2 gets its own nvme-k8s pool.
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   topologySpreadConstraints:
     - maxSkew: 1

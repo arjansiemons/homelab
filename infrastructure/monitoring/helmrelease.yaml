@@ -226,7 +226,7 @@ spec:
           limits:
             cpu: "1"
             memory: 2Gi
-        retention: 10d
+        retention: 5d
         storageSpec:
           volumeClaimTemplate:
             spec:

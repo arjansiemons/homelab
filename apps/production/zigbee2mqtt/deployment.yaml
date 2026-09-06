@@ -67,7 +67,7 @@ spec:
       volumes:
         - name: zigbee2mqtt-data
           persistentVolumeClaim:
-            claimName: zigbee2mqtt-claim
+            claimName: zigbee2mqtt-claim-longhorn
         - name: zigbee2mqtt-udev
           hostPath:
             path: /run/udev

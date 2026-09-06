@@ -6,6 +6,13 @@ metadata:
 spec:
   instances: 3  # 3+ instances lets CNPG evict a replica cleanly during node drains (2 instances blocks it, see docs)
   imageName: ghcr.io/cloudnative-pg/postgresql:16
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          cnpg.io/cluster: cert-practice-postgres
   backup:
     barmanObjectStore:
       destinationPath: s3://homelab-backups-prod/cnpg/cert-practice-postgres

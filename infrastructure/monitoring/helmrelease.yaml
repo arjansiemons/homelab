@@ -34,14 +34,6 @@ spec:
           - target:
               kind: Service
               namespace: monitoring
-              name: kube-prometheus-stack-grafana
-            patch: |
-              - op: replace
-                path: /spec/ports/0/targetPort
-                value: grafana
-          - target:
-              kind: Service
-              namespace: monitoring
               name: kube-prometheus-stack-prometheus
             patch: |
               - op: replace
@@ -89,14 +81,6 @@ spec:
               kind: ServiceAccount
               namespace: monitoring
               name: kube-prometheus-stack-alertmanager
-            patch: |
-              - op: add
-                path: /automountServiceAccountToken
-                value: false
-          - target:
-              kind: ServiceAccount
-              namespace: monitoring
-              name: kube-prometheus-stack-grafana
             patch: |
               - op: add
                 path: /automountServiceAccountToken
@@ -221,51 +205,7 @@ spec:
             hosts:
               - alertmanager.local.siemons-it.nl
     grafana:
-      resources:
-        requests:
-          cpu: 100m
-          memory: 256Mi
-        limits:
-          cpu: 500m
-          memory: 512Mi
-      initChownData:
-        resources:
-          requests:
-            cpu: 10m
-            memory: 64Mi
-          limits:
-            cpu: 100m
-            memory: 128Mi
-      sidecar:
-        resources:
-          requests:
-            cpu: 10m
-            memory: 64Mi
-          limits:
-            cpu: 500m
-            memory: 128Mi
-        dashboards:
-          enabled: true
-          label: grafana_dashboard
-          labelValue: "1"
-          searchNamespace: monitoring
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          cert-manager.io/cluster-issuer: local-siemons-it-nl
-        hosts:
-          - grafana.local.siemons-it.nl
-        tls:
-          - secretName: local-siemons-it-nl-tls
-            hosts:
-              - grafana.local.siemons-it.nl
-      persistence:
-        enabled: true
-        storageClassName: proxmox-csi-nvme
-        accessModes:
-          - ReadWriteOnce
-        size: 5Gi
+      enabled: false
     prometheus:
       ingress:
         enabled: true

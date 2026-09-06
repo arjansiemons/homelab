@@ -4,7 +4,7 @@ metadata:
   name: n8n
   namespace: n8n
 spec:
-  maxUnavailable: 0
+  maxUnavailable: 1
   selector:
     matchLabels:
       app: n8n

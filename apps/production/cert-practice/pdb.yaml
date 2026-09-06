@@ -4,7 +4,7 @@ metadata:
   name: cert-practice-backend
   namespace: default
 spec:
-  maxUnavailable: 0
+  maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: cert-practice
@@ -17,7 +17,7 @@ metadata:
   name: cert-practice-frontend
   namespace: default
 spec:
-  maxUnavailable: 0
+  maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: cert-practice

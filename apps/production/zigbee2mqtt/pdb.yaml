@@ -4,7 +4,7 @@ metadata:
   name: zigbee2mqtt
   namespace: default
 spec:
-  maxUnavailable: 0
+  maxUnavailable: 1
   selector:
     matchLabels:
       app: zigbee2mqtt

@@ -4,7 +4,7 @@ metadata:
   name: mealie
   namespace: default
 spec:
-  maxUnavailable: 0
+  maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: mealie

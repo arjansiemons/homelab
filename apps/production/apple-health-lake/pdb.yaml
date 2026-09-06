@@ -4,7 +4,7 @@ metadata:
   name: apple-health-lake
   namespace: default
 spec:
-  maxUnavailable: 0
+  maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: apple-health-lake
@@ -17,7 +17,7 @@ metadata:
   name: apple-health-lake-mcp
   namespace: default
 spec:
-  maxUnavailable: 0
+  maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: apple-health-lake

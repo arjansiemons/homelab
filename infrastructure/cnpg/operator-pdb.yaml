@@ -4,7 +4,7 @@ metadata:
   name: cloudnative-pg
   namespace: postgresql-system
 spec:
-  minAvailable: 1
+  maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: cloudnative-pg

@@ -4,7 +4,7 @@ metadata:
   name: n8n-postgres
   namespace: postgresql-system
 spec:
-  instances: 2  # Keep one replica so the generated -ro service always has endpoints
+  instances: 3  # 3+ instances lets CNPG evict a replica cleanly during node drains (2 instances blocks it, see docs)
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   backup:
     barmanObjectStore:

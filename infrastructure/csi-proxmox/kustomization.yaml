@@ -5,3 +5,4 @@ resources:
   - proxmox-csi-plugin-node-daemonset.yaml
   - proxmox-csi-plugin-controller-deployment.yaml
   - storageclass-nvme.yaml
+  - storageclass-ssd.yaml

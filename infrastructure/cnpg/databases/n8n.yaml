@@ -4,7 +4,7 @@ metadata:
   name: n8n-postgres
   namespace: postgresql-system
 spec:
-  instances: 2  # temporarily 2: only 2 nodes have nvme-k8s storage right now (work-02 removed). Bump back to 3 once pve2 gets its own nvme-k8s pool.
+  instances: 3  # temporarily 3 during migration to Longhorn: the 3rd (new) instance lands on the longhorn storageClass, then we drop one of the two old proxmox-csi-nvme instances and scale back to 2.
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   topologySpreadConstraints:
     - maxSkew: 1
@@ -32,7 +32,7 @@ spec:
     retentionPolicy: "14d"
   storage:
     size: 10Gi
-    storageClass: proxmox-csi-nvme
+    storageClass: longhorn
   bootstrap:
     initdb:
       database: n8n

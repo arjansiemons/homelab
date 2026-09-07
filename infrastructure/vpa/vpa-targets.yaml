@@ -1,20 +1,7 @@
-# Recommendation-only (updateMode: "Off") VPAs for the components whose default
-# Helm-chart requests turned out to be far above their real homelab-scale usage.
-# Nothing here changes running resources; these just populate .status.recommendation
-# on each object so we have real data to size requests against, instead of guessing.
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
-  name: cilium
-  namespace: kube-system
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: DaemonSet
-    name: cilium
-  updatePolicy:
-    updateMode: "Off"
----
+# Recommendation-only (updateMode: "Off") VPA for the one component not already
+# covered by the goldilocks-* VPA objects left behind by a since-removed
+# Goldilocks install (those cover most of the cluster already and get fresh
+# data again now that a recommender is running; no need to duplicate them here).
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
@@ -25,31 +12,5 @@ spec:
     apiVersion: apps/v1
     kind: DaemonSet
     name: longhorn-manager
-  updatePolicy:
-    updateMode: "Off"
----
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
-  name: kube-prometheus-stack-prometheus
-  namespace: monitoring
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: StatefulSet
-    name: prometheus-kube-prometheus-stack-prometheus
-  updatePolicy:
-    updateMode: "Off"
----
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
-  name: cert-manager
-  namespace: cert-manager
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: cert-manager
   updatePolicy:
     updateMode: "Off"

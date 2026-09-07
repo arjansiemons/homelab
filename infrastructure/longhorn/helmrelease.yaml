@@ -27,6 +27,8 @@ spec:
       replicaSoftAntiAffinity: false
       replicaZoneSoftAntiAffinity: true
       defaultReplicaCount: 2
+      replicaAutoBalance: least-effort  # auto-rebalance replicas across zones instead of needing manual intervention
+      storageMinimalAvailablePercentage: 10  # we use a dedicated disk (not the root disk), so Longhorn's own guidance is 10% not the 25% default
     persistence:
       defaultClass: false
       defaultClassReplicaCount: 2

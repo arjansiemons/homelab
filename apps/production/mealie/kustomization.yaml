@@ -9,6 +9,7 @@ resources:
   - service.yaml
   - ingress.yaml
   - pdb.yaml
+  - pvc-longhorn.yaml
 
 commonLabels:
   app.kubernetes.io/instance: mealie

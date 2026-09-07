@@ -8,7 +8,6 @@ resources:
   - configmap.yaml
   - deployment.yaml
   - ingress.yaml
-  - pvc.yaml
   - pvc-longhorn.yaml
   - service.yaml
   - external-secret.yaml

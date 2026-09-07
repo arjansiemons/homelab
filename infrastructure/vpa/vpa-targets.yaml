@@ -1,7 +1,9 @@
-# Recommendation-only (updateMode: "Off") VPA for the one component not already
-# covered by the goldilocks-* VPA objects left behind by a since-removed
-# Goldilocks install (those cover most of the cluster already and get fresh
-# data again now that a recommender is running; no need to duplicate them here).
+# Actively-applied (InPlaceOrRecreate) VPAs: reviewed recommendations we trust
+# enough to let VPA apply automatically, without a pod restart when possible.
+# Everything else in the cluster still has an Off-mode VPA (either one of the
+# goldilocks-* objects left behind by a since-removed Goldilocks install, now
+# getting fresh data again from our recommender, or none yet) and stays
+# observe-only until reviewed the same way.
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
@@ -13,4 +15,30 @@ spec:
     kind: DaemonSet
     name: longhorn-manager
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-cilium
+  namespace: kube-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: cilium
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-cert-manager
+  namespace: cert-manager
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cert-manager
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"

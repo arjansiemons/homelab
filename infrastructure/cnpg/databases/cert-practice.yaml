@@ -4,7 +4,7 @@ metadata:
   name: cert-practice-postgres
   namespace: postgresql-system
 spec:
-  instances: 2  # temporarily 2: only 2 nodes have nvme-k8s storage right now (work-02 removed). Bump back to 3 once pve2 gets its own nvme-k8s pool.
+  instances: 2  # migrated to Longhorn: cert-practice-postgres-3 was unrecoverable (pg_rewind timeline divergence) and gets rebuilt fresh on longhorn as the replica. Primary (cert-practice-postgres-4) stays on proxmox-csi-nvme for now.
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   topologySpreadConstraints:
     - maxSkew: 1
@@ -32,7 +32,7 @@ spec:
     retentionPolicy: "14d"
   storage:
     size: 5Gi
-    storageClass: proxmox-csi-nvme
+    storageClass: longhorn
   bootstrap:
     initdb:
       database: cert_practice

@@ -4,7 +4,7 @@ metadata:
   name: apple-health-lake-postgres
   namespace: postgresql-system
 spec:
-  instances: 3  # temporarily 3 during migration to Longhorn: the 3rd (new) instance lands on the longhorn storageClass, then we drop one of the two old proxmox-csi-nvme instances and scale back to 2.
+  instances: 2  # migrated to Longhorn: apple-health-lake-postgres-5 (work-03) replaced apple-health-lake-postgres-1 as the replica. Primary (apple-health-lake-postgres-4) stays on proxmox-csi-nvme for now.
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   topologySpreadConstraints:
     - maxSkew: 1

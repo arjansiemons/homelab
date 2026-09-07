@@ -13,6 +13,12 @@ spec:
       labelSelector:
         matchLabels:
           cnpg.io/cluster: apple-health-lake-postgres
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway  # best-effort: prefer spreading across pve/pve2 hosts, but don't block scheduling if pve2 has no room
+      labelSelector:
+        matchLabels:
+          cnpg.io/cluster: apple-health-lake-postgres
   backup:
     barmanObjectStore:
       destinationPath: s3://homelab-backups-prod/cnpg/apple-health-lake-postgres

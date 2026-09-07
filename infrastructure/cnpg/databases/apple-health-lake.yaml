@@ -4,7 +4,7 @@ metadata:
   name: apple-health-lake-postgres
   namespace: postgresql-system
 spec:
-  instances: 2  # fully migrated to Longhorn (both instances), spread across work-00/work-01/work-03.
+  instances: 3  # 3 instances so CNPG's PDB allows voluntary eviction of one replica during kubectl drain (2 instances blocks all disruption, see CNPG docs).
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   topologySpreadConstraints:
     - maxSkew: 1

@@ -77,4 +77,4 @@ spec:
       volumes:
         - name: api-data
           persistentVolumeClaim:
-            claimName: mealie-api-data
+            claimName: mealie-api-data-longhorn

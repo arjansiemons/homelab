@@ -1,0 +1,43 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: vpa
+  namespace: kube-system
+spec:
+  interval: 1h
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+  chart:
+    spec:
+      chart: vpa
+      version: "5.0.x"
+      sourceRef:
+        kind: HelmRepository
+        name: fairwinds-stable
+        namespace: flux-system
+  values:
+    metrics-server:
+      enabled: false  # already running our own metrics-server
+    recommender:
+      enabled: true
+      extraArgs:
+        v: "2"
+        pod-recommendation-min-cpu-millicores: 5
+        pod-recommendation-min-memory-mb: 10
+      resources:
+        requests:
+          cpu: 20m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+    # Recommendation-only for now: no pod evictions or admission-time overrides.
+    # Individual VerticalPodAutoscaler objects control their own updateMode.
+    updater:
+      enabled: false
+    admissionController:
+      enabled: false

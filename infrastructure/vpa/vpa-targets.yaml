@@ -1,0 +1,55 @@
+# Recommendation-only (updateMode: "Off") VPAs for the components whose default
+# Helm-chart requests turned out to be far above their real homelab-scale usage.
+# Nothing here changes running resources; these just populate .status.recommendation
+# on each object so we have real data to size requests against, instead of guessing.
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: cilium
+  namespace: kube-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: cilium
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-manager
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: longhorn-manager
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: kube-prometheus-stack-prometheus
+  namespace: monitoring
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: prometheus-kube-prometheus-stack-prometheus
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cert-manager
+  updatePolicy:
+    updateMode: "Off"

@@ -14,3 +14,4 @@ resources:
   - networkpolicies/
   - network/cilium/
   - traefik/
+  - vpa/

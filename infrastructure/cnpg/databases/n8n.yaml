@@ -4,7 +4,7 @@ metadata:
   name: n8n-postgres
   namespace: postgresql-system
 spec:
-  instances: 2  # migrated to Longhorn: n8n-postgres-12 (work-03) replaced n8n-postgres-8 as the replica. Primary (n8n-postgres-11) stays on proxmox-csi-nvme for now.
+  instances: 2  # fully migrated to Longhorn (both instances), spread across work-00/work-01/work-03.
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   topologySpreadConstraints:
     - maxSkew: 1

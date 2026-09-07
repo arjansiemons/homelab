@@ -4,7 +4,7 @@ metadata:
   name: cert-practice-postgres
   namespace: postgresql-system
 spec:
-  instances: 2  # migrated to Longhorn: cert-practice-postgres-3 was unrecoverable (pg_rewind timeline divergence) and gets rebuilt fresh on longhorn as the replica. Primary (cert-practice-postgres-4) stays on proxmox-csi-nvme for now.
+  instances: 2  # fully migrated to Longhorn (both instances), spread across work-00/work-01/work-03.
   imageName: ghcr.io/cloudnative-pg/postgresql:16
   topologySpreadConstraints:
     - maxSkew: 1

@@ -42,3 +42,218 @@ spec:
     name: cert-manager
   updatePolicy:
     updateMode: "InPlaceOrRecreate"
+---
+# Next batch: 2-replica components (zero-downtime, VPA can update one at a
+# time) plus background operators we already bounced without impact tonight.
+# Still holding off on user-facing apps (traefik, mealie, homepage, ...) for
+# a later round.
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-coredns
+  namespace: kube-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: coredns
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-cilium-operator
+  namespace: kube-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cilium-operator
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-snapshot-controller
+  namespace: kube-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: snapshot-controller
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-cloudnative-pg
+  namespace: postgresql-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cloudnative-pg
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-velero
+  namespace: velero
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: velero
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-kube-prometheus-stack-operator
+  namespace: monitoring
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: kube-prometheus-stack-operator
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-external-secrets
+  namespace: external-secrets
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: external-secrets
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+# Public apps (all in this repo, not the private one) with existing
+# goldilocks-* recommendation history. Single-replica, so a brief restart
+# is possible on first apply, same as what we already saw tonight for these.
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-mealie
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mealie
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-zigbee2mqtt
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: zigbee2mqtt
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-homepage
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: homepage
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-blog
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: blog
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-mosquitto
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mosquitto
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-mosquitto-b
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mosquitto-b
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-cert-practice-frontend
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cert-practice-frontend
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-cert-practice-backend
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: cert-practice-backend
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-reloader-reloader
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reloader-reloader
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"

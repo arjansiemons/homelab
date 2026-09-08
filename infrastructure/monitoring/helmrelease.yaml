@@ -227,6 +227,16 @@ spec:
             cpu: "1"
             memory: 2Gi
         retention: 5d
+        affinity:
+          nodeAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                preference:
+                  matchExpressions:
+                    - key: kubernetes.io/hostname
+                      operator: In
+                      values:
+                        - work-03
         storageSpec:
           volumeClaimTemplate:
             spec:

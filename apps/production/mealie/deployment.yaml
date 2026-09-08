@@ -25,6 +25,16 @@ spec:
       automountServiceAccountToken: false
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: kubernetes.io/hostname
+                    operator: In
+                    values:
+                      - work-03
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000

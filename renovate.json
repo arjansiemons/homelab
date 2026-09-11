@@ -3,6 +3,16 @@
   "extends": [
     "config:recommended"
   ],
+  "flux": {
+    "includePaths": [
+      "**/clusters/**",
+      "**/infrastructure/**",
+      "**/apps/**"
+    ],
+    "managerFilePatterns": [
+      "/(^|/)[^/]*\\.ya?ml$/"
+    ]
+  },
   "kubernetes": {
     "includePaths": [
       "**/clusters/**",

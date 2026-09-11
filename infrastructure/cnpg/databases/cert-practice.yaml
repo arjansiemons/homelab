@@ -6,14 +6,6 @@ metadata:
 spec:
   instances: 3  # 3 instances so CNPG's PDB allows voluntary eviction of one replica during kubectl drain (2 instances blocks all disruption, see CNPG docs).
   imageName: ghcr.io/cloudnative-pg/postgresql:16
-  probes:
-    startup:
-      failureThreshold: 30  # 300s: give recovery/basebackup room to finish under load instead of being killed mid-startup and looping forever
-      timeoutSeconds: 5
-    liveness:
-      timeoutSeconds: 5
-    readiness:
-      timeoutSeconds: 5
   topologySpreadConstraints:
     - maxSkew: 1
       topologyKey: kubernetes.io/hostname

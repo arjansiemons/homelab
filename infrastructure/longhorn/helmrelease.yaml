@@ -15,7 +15,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: "1.12.x"
+      version: "1.10.x"  # Longhorn refuses to skip minor versions (e.g. 1.9->1.12 fails pre-upgrade check) - bump one minor at a time: 1.10 -> 1.11 -> 1.12
       sourceRef:
         kind: HelmRepository
         name: longhorn

@@ -15,7 +15,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: "1.9.x"
+      version: "1.12.x"
       sourceRef:
         kind: HelmRepository
         name: longhorn

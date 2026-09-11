@@ -16,7 +16,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: "1.11.x"  # Longhorn refuses to skip minor versions (e.g. 1.9->1.12 fails pre-upgrade check) - bump one minor at a time. 1.11.0 has known manager/instance-manager regressions fixed in 1.11.1+, hence the range instead of pinning 1.11.0. Next: 1.12.x
+      version: "1.12.x"  # Longhorn refuses to skip minor versions (e.g. 1.9->1.12 fails pre-upgrade check) - bumped one minor at a time: 1.9 -> 1.10 -> 1.11 -> 1.12 (latest)
       sourceRef:
         kind: HelmRepository
         name: longhorn

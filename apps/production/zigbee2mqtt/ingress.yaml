@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: zigbee2mqtt-ingress
   namespace: default
-  annotations:
-    cert-manager.io/issuer: "local-siemons-it-nl"
 spec:
   tls:
     - hosts:

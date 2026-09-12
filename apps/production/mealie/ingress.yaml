@@ -4,8 +4,6 @@ kind: Ingress
 metadata:
   name: mealie-ingress
   namespace: default
-  annotations:
-    cert-manager.io/issuer: "local-siemons-it-nl"
 spec:
   tls:
     - hosts:

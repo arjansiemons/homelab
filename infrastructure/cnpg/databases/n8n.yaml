@@ -67,5 +67,5 @@ spec:
             name: cnpg-backup-b2-credentials
             key: ACCESS_SECRET_KEY
         wal:
-          maxParallel: 4
+          maxParallel: 1  # serial restore - parallel workers seem to race on an internal credentials cache, causing "failed to get envs: cache miss"
 

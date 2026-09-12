@@ -5,3 +5,4 @@ resources:
   - helmrepo.yaml
   - helmrelease.yaml
   - vpa-targets.yaml
+  - limitranges.yaml

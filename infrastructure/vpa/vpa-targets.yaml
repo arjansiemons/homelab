@@ -257,3 +257,209 @@ spec:
     name: reloader-reloader
   updatePolicy:
     updateMode: "InPlaceOrRecreate"
+---
+# Next batch: components with existing goldilocks-* recommendation history
+# (left behind by the removed Goldilocks install, now getting fresh data
+# from our own recommender) that were never promoted to auto-apply.
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-traefik
+  namespace: traefik
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: traefik
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-hubble-relay
+  namespace: kube-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hubble-relay
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-hubble-ui
+  namespace: kube-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: hubble-ui
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-external-secrets-cert-controller
+  namespace: external-secrets
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: external-secrets-cert-controller
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-external-secrets-webhook
+  namespace: external-secrets
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: external-secrets-webhook
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-proxmox-csi-plugin-controller
+  namespace: csi-proxmox
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: proxmox-csi-plugin-controller
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-proxmox-csi-plugin-node
+  namespace: csi-proxmox
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: proxmox-csi-plugin-node
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: goldilocks-reflector
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: reflector
+  updatePolicy:
+    updateMode: "InPlaceOrRecreate"
+---
+# Longhorn's other components (csi-attacher/provisioner/resizer/snapshotter,
+# driver-deployer, ui, csi-plugin) have never had any VPA/recommendation
+# history at all, unlike longhorn-manager above. Start Off (observe-only)
+# to gather real data before trusting an auto-applied value, same
+# discipline as every other component's first round. The engine-image-*
+# DaemonSet is deliberately excluded - its name is tied to the current
+# engine image hash and gets replaced wholesale on every Longhorn upgrade,
+# so a VPA targeting today's name would silently stop matching anything.
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-csi-attacher
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: csi-attacher
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-csi-provisioner
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: csi-provisioner
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-csi-resizer
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: csi-resizer
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-csi-snapshotter
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: csi-snapshotter
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-driver-deployer
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: longhorn-driver-deployer
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-ui
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: longhorn-ui
+  updatePolicy:
+    updateMode: "Off"
+---
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: longhorn-csi-plugin
+  namespace: longhorn-system
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: longhorn-csi-plugin
+  updatePolicy:
+    updateMode: "Off"

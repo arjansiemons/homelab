@@ -1,0 +1,51 @@
+# Default requests/limits for any container that doesn't specify its own -
+# this is exactly what would have prevented the reflector Deployment from
+# being stuck unable to schedule for months: it had zero resources and the
+# default-quota ResourceQuota in "default" requires every pod to specify
+# them, with no way for a pod to fall back to a sane default without one
+# of these. Values are deliberately small/generic; VPA (see vpa-targets.yaml)
+# takes over with real numbers for anything it's tracking.
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-resources
+  namespace: default
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 25m
+        memory: 64Mi
+      default:
+        cpu: 250m
+        memory: 256Mi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-resources
+  namespace: traefik
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 25m
+        memory: 64Mi
+      default:
+        cpu: 250m
+        memory: 256Mi
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-resources
+  namespace: longhorn-system
+spec:
+  limits:
+    - type: Container
+      defaultRequest:
+        cpu: 25m
+        memory: 64Mi
+      default:
+        cpu: 250m
+        memory: 256Mi

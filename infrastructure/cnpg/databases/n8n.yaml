@@ -29,7 +29,7 @@ spec:
           cnpg.io/cluster: n8n-postgres
   backup:
     barmanObjectStore:
-      destinationPath: s3://homelab-backups-prod/cnpg/n8n-postgres-restored  # new empty path: CNPG refuses to archive WAL into the same non-empty path used to restore from
+      destinationPath: s3://homelab-backups-prod/cnpg/n8n-postgres-restored  # kept: the original path still holds the pre-incident cluster's backup/WAL history, and CNPG refuses to archive into a non-empty path from an unrelated cluster identity
       endpointURL: https://s3.eu-central-003.backblazeb2.com
       s3Credentials:
         accessKeyId:
@@ -48,7 +48,7 @@ spec:
     size: 10Gi
     storageClass: longhorn
   bootstrap:
-    recovery:
-      backup:
-        name: n8n-postgres-daily-20260911230200  # the last good backup CR (2026-09-11 23:02), before the cluster got stuck - using a direct Backup reference instead of externalClusters/source, which hits a CNPG bug ("failed to get envs: cache miss") on every attempt
+    initdb:
+      database: n8n
+      owner: n8n
 

@@ -6,7 +6,7 @@ metadata:
   namespace: flux-system
 spec:
   image: ghcr.io/arjansiemons/hugo-site
-  interval: 1m0s
+  interval: 10m0s
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
@@ -16,7 +16,7 @@ metadata:
 spec:
   imageRepositoryRef:
     name: blog
-  interval: 1m0s
+  interval: 10m0s
   # hugo-site's CI only publishes "latest"/"buildcache"/<git-sha> tags, none
   # of which are semver - a semver policy can never resolve a "latest
   # version" from that list. Track the "latest" tag's digest instead (the

@@ -16,16 +16,25 @@ metadata:
 spec:
   imageRepositoryRef:
     name: blog
-  interval: 10m0s
   # hugo-site's CI only publishes "latest"/"buildcache"/<git-sha> tags, none
   # of which are semver - a semver policy can never resolve a "latest
-  # version" from that list. Track the "latest" tag's digest instead (the
-  # documented Flux pattern for a repo without semver releases).
+  # version" from that list. Filtering to just "latest" + alphabetical
+  # trivially resolves to that one tag.
+  #
+  # digestReflectionPolicy: Always (Flux's documented way to catch a
+  # mutable tag's content changing without the tag itself changing) was
+  # tried here and reliably fails with "unable to determine latest version
+  # from provided list" on image-reflector-controller v1.2.5 - Flux's own
+  # digest-reflection example only pairs it with a semver policy against a
+  # real semver-tagged repo, not a filterTags-to-one-literal-tag setup like
+  # this, so this combination may simply not be supported. Left off: this
+  # policy still correctly re-resolves "latest" on every scan, it just
+  # won't re-trigger the update automation if hugo-site pushes new content
+  # under the same "latest" tag without another observable change.
   filterTags:
     pattern: '^latest$'
   policy:
     alphabetical: {}
-  digestReflectionPolicy: Always
 ---
 apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation

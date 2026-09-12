@@ -49,23 +49,6 @@ spec:
     storageClass: longhorn
   bootstrap:
     recovery:
-      source: n8n-postgres-backup  # restored from the last good backup after the cluster's own instances got stuck in an unrecoverable restart loop
-      recoveryTarget:
-        backupID: "20260911T230200"  # last good backup (2026-09-11 23:02), before the cluster got stuck
-        targetImmediate: true  # stop at the backup's own consistency point - avoids replaying extra WAL via externalClusters, which hits a CNPG bug ("failed to get envs: cache miss") every time
-  externalClusters:
-    - name: n8n-postgres-backup
-      barmanObjectStore:
-        destinationPath: s3://homelab-backups-prod/cnpg/n8n-postgres
-        serverName: n8n-postgres  # backups are stored under the original cluster's name, not this externalCluster's name
-        endpointURL: https://s3.eu-central-003.backblazeb2.com
-        s3Credentials:
-          accessKeyId:
-            name: cnpg-backup-b2-credentials
-            key: ACCESS_KEY_ID
-          secretAccessKey:
-            name: cnpg-backup-b2-credentials
-            key: ACCESS_SECRET_KEY
-        wal:
-          maxParallel: 1  # serial restore - parallel workers seem to race on an internal credentials cache, causing "failed to get envs: cache miss"
+      backup:
+        name: n8n-postgres-daily-20260911230200  # the last good backup CR (2026-09-11 23:02), before the cluster got stuck - using a direct Backup reference instead of externalClusters/source, which hits a CNPG bug ("failed to get envs: cache miss") on every attempt
 

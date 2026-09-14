@@ -34,18 +34,3 @@ spec:
       default:
         cpu: 250m
         memory: 256Mi
----
-apiVersion: v1
-kind: LimitRange
-metadata:
-  name: default-resources
-  namespace: longhorn-system
-spec:
-  limits:
-    - type: Container
-      defaultRequest:
-        cpu: 25m
-        memory: 64Mi
-      default:
-        cpu: 250m
-        memory: 256Mi

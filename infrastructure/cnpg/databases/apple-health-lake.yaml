@@ -6,6 +6,17 @@ metadata:
 spec:
   instances: 3  # 3 instances so CNPG's PDB allows voluntary eviction of one replica during kubectl drain (2 instances blocks all disruption, see CNPG docs).
   imageName: ghcr.io/cloudnative-pg/postgresql:16
+  # Previously unset, so every instance ran under whatever namespace/cluster
+  # defaults applied (effectively unbounded). Explicit and modest: this is a
+  # single-purpose Postgres for one low-traffic personal API, not a shared
+  # or high-throughput cluster.
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "1"
+      memory: "1Gi"
   probes:
     startup:
       failureThreshold: 30  # 300s: recovery/basebackup needs room to finish under load instead of being killed mid-startup and looping forever

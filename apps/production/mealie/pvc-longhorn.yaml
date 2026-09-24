@@ -3,6 +3,8 @@ apiVersion: v1
 metadata:
   name: mealie-api-data-longhorn
   namespace: default
+  annotations:
+    kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
   accessModes:
     - "ReadWriteOnce"

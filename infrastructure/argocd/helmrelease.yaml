@@ -23,6 +23,55 @@ spec:
     configs:
       params:
         server.insecure: true
+      cm:
+        # Chart default excludes Endpoints/EndpointSlice entirely, which silently
+        # skips manually-authored EndpointSlices (e.g. selector-less Services
+        # pointing at hosts outside the cluster, like home-assistant). Re-include
+        # them so Argo actually applies and self-heals those; keep the rest of
+        # the chart's default exclusions to avoid re-introducing that noise.
+        resource.exclusions: |
+          - apiGroups:
+              - coordination.k8s.io
+            kinds:
+              - Lease
+          - apiGroups:
+              - authentication.k8s.io
+              - authorization.k8s.io
+            kinds:
+              - SelfSubjectReview
+              - TokenReview
+              - LocalSubjectAccessReview
+              - SelfSubjectAccessReview
+              - SelfSubjectRulesReview
+              - SubjectAccessReview
+          - apiGroups:
+              - certificates.k8s.io
+            kinds:
+              - CertificateSigningRequest
+          - apiGroups:
+              - cert-manager.io
+            kinds:
+              - CertificateRequest
+          - apiGroups:
+              - cilium.io
+            kinds:
+              - CiliumIdentity
+              - CiliumEndpoint
+              - CiliumEndpointSlice
+          - apiGroups:
+              - kyverno.io
+              - reports.kyverno.io
+              - wgpolicyk8s.io
+            kinds:
+              - PolicyReport
+              - ClusterPolicyReport
+              - EphemeralReport
+              - ClusterEphemeralReport
+              - AdmissionReport
+              - ClusterAdmissionReport
+              - BackgroundScanReport
+              - ClusterBackgroundScanReport
+              - UpdateRequest
     server:
       ingress:
         enabled: true

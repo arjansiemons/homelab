@@ -5,6 +5,7 @@ metadata:
   namespace: n8n
   annotations:
     kustomize.toolkit.fluxcd.io/prune: disabled
+    argocd.argoproj.io/sync-options: Prune=false
 spec:
   accessModes:
   - ReadWriteOnce

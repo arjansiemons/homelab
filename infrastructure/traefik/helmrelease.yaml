@@ -71,7 +71,7 @@ spec:
       kubernetesIngress:
         enabled: true
         publishedService:
-          enabled: false
+          enabled: true
         allowExternalNameServices: true
     ingressRoute:
       dashboard:

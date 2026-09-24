@@ -23,15 +23,6 @@ spec:
     configs:
       params:
         server.insecure: true
-      cm:
-        # Traefik in this cluster doesn't populate Ingress status.loadBalancer
-        # (providers.kubernetesIngress.publishedService.enabled: false), so Argo's
-        # built-in Ingress health check would otherwise report "Progressing" forever.
-        resource.customizations.health.networking.k8s.io_Ingress: |
-          hs = {}
-          hs.status = "Healthy"
-          hs.message = "Ingress is considered healthy"
-          return hs
     server:
       ingress:
         enabled: true

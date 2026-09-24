@@ -3,4 +3,5 @@ kind: Kustomization
 
 resources:
   - cert-practice.yaml
+  - mealie.yaml
   - zigbee2mqtt.yaml

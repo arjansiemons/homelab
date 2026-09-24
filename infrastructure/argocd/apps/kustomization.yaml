@@ -2,10 +2,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+  - apple-health-lake.yaml
   - blog.yaml
   - cert-practice.yaml
+  - health-dashboard.yaml
   - home-assistant.yaml
+  - homepage.yaml
+  - hubble.yaml
   - mealie.yaml
   - mosquitto.yaml
   - n8n.yaml
+  - reloader.yaml
+  - traefik-dashboard.yaml
   - zigbee2mqtt.yaml

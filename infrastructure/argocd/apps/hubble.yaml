@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hubble
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: ssh://git@github.com/arjansiemons/homelab-private
+    targetRevision: main
+    path: apps/production/hubble
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kube-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false

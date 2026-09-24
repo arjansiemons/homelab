@@ -6,4 +6,3 @@ resources:
   - mealie
   - mosquitto
   - n8n
-  - zigbee2mqtt

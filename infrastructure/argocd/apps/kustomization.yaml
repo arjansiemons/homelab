@@ -6,6 +6,7 @@ resources:
   - blog.yaml
   - cert-practice.yaml
   - health-dashboard.yaml
+  - hermes-agent.yaml
   - home-assistant.yaml
   - homepage.yaml
   - hubble.yaml

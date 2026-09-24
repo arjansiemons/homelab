@@ -6,4 +6,3 @@ resources:
   - helmrepo.yaml
   - helmrelease.yaml
   - repo-credentials-external-secret.yaml
-  - apps/

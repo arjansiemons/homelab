@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - arc/
+  - argocd/
   - cert-manager/
   - csi-proxmox/
   - cnpg/

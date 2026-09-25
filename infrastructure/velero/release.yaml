@@ -70,7 +70,16 @@ spec:
         memory: 512Mi
     initContainers:
       - name: velero-plugin-for-aws
-        image: velero/velero-plugin-for-aws:v1.14.3
+        # Pinned below v1.14.1: every version from v1.14.1 through the
+        # current v1.14.3 sends an x-amz-tagging header on every PutObject
+        # (even the small velero-backup.json / -resource-list.json.gz
+        # metadata objects), which Backblaze B2 rejects outright
+        # ("Unsupported header 'x-amz-tagging'") - this made every backup
+        # in this cluster fail its final upload step for weeks, even
+        # though the per-volume PodVolumeBackup data itself still
+        # succeeded. v1.14.1 introduced the AWS SDK v2 migration that
+        # added this behavior; v1.14.0 predates it entirely.
+        image: velero/velero-plugin-for-aws:v1.14.0
         imagePullPolicy: IfNotPresent
         resources:
           requests:

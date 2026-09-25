@@ -43,6 +43,11 @@
           "ghcr.io/arjansiemons/apple-health-lake-mcp"
         ],
         "enabled": true
+      },
+      {
+        "description": "velero-plugin-for-aws: pinned to v1.14.0 (see comment in infrastructure/velero/release.yaml) - every version from v1.14.1 through at least v1.14.3 sends an x-amz-tagging header on every PutObject that Backblaze B2 rejects, silently breaking all backups. Do not auto-merge past v1.14.0 without confirming the B2 incompatibility is actually fixed upstream.",
+        "matchPackageNames": ["velero/velero-plugin-for-aws"],
+        "enabled": false
       }
     ]
   }

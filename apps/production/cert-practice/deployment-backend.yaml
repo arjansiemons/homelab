@@ -45,6 +45,8 @@ spec:
                   key: ANTHROPIC_API_KEY
             - name: TZ
               value: Europe/Amsterdam
+            - name: DEFAULT_USERNAME
+              value: arjan
           ports:
             - containerPort: 8000
               name: http

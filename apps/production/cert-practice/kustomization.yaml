@@ -12,6 +12,10 @@ resources:
   - ingress.yaml
   - external-secret.yaml
   - pdb.yaml
+  - cloudflared-serviceaccount.yaml
+  - cloudflared-external-secret.yaml
+  - cloudflared-config.yaml
+  - cloudflared.yaml
 
 commonLabels:
   app.kubernetes.io/instance: cert-practice

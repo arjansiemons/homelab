@@ -79,7 +79,7 @@ spec:
         # though the per-volume PodVolumeBackup data itself still
         # succeeded. v1.14.1 introduced the AWS SDK v2 migration that
         # added this behavior; v1.14.0 predates it entirely.
-        image: velero/velero-plugin-for-aws:v1.14.0
+        image: velero/velero-plugin-for-aws:v1.14.3
         imagePullPolicy: IfNotPresent
         resources:
           requests:

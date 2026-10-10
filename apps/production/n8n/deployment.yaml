@@ -31,7 +31,7 @@ spec:
                       - work-03
       containers:
         - name: n8n
-          image: n8nio/n8n:2.43.1
+          image: n8nio/n8n:2.43.3
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false

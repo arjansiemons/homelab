@@ -8,6 +8,7 @@ resources:
   - health-dashboard.yaml
   - hermes-agent.yaml
   - home-assistant.yaml
+  - homelab-private-apps.yaml
   - homepage.yaml
   - hubble.yaml
   - mealie.yaml

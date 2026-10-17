@@ -1,17 +1,19 @@
+# App-of-apps for homelab-private: new private apps add their Application
+# under argocd/apps in that repo, so their names stay out of this public repo.
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ghostfolio
+  name: homelab-private-apps
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: ssh://git@github.com/arjansiemons/homelab-private
     targetRevision: main
-    path: apps/production/ghostfolio
+    path: argocd/apps
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argocd
   syncPolicy:
     automated:
       prune: true

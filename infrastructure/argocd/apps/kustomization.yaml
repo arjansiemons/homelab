@@ -5,10 +5,10 @@ resources:
   - apple-health-lake.yaml
   - blog.yaml
   - cert-practice.yaml
-  - ghostfolio.yaml
   - health-dashboard.yaml
   - hermes-agent.yaml
   - home-assistant.yaml
+  - homelab-private-apps.yaml
   - homepage.yaml
   - hubble.yaml
   - mealie.yaml

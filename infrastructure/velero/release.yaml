@@ -125,6 +125,12 @@ spec:
         - --default-repo-maintain-frequency=24h
     deployNodeAgent: true
     nodeAgent:
+      # Run on ctrl-00 too: Velero errors out on every pod scheduled on a
+      # node without a running node-agent, even if it only has hostPath volumes.
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
       resources:
         requests:
           cpu: 50m

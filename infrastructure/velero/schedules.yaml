@@ -12,7 +12,9 @@ spec:
       - '*'
     excludedNamespaces:
       - arc-runners
-    snapshotVolumes: true
+    # PVCs go through fs-backup (kopia); there is no VolumeSnapshotClass, so
+    # snapshot attempts on unmounted PVCs can only fail.
+    snapshotVolumes: false
     defaultVolumesToFsBackup: true
     includeClusterResources: true
 ---
@@ -30,6 +32,8 @@ spec:
       - '*'
     excludedNamespaces:
       - arc-runners
-    snapshotVolumes: true
+    # PVCs go through fs-backup (kopia); there is no VolumeSnapshotClass, so
+    # snapshot attempts on unmounted PVCs can only fail.
+    snapshotVolumes: false
     defaultVolumesToFsBackup: true
     includeClusterResources: true

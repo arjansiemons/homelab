@@ -1,0 +1,18 @@
+# Skip emptyDir volumes in fs-backup: they hold no data worth keeping, and
+# for Talos static pods on ctrl-00 (kube-apiserver, scheduler,
+# controller-manager) the mirror pod UID doesn't match the kubelet pod dir,
+# so node-agent can never find them and every backup ends PartiallyFailed.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: velero-volume-policy
+  namespace: velero
+data:
+  policy.yaml: |
+    version: v1
+    volumePolicies:
+      - conditions:
+          volumeTypes:
+            - emptyDir
+        action:
+          type: skip

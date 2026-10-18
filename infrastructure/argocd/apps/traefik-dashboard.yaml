@@ -3,6 +3,10 @@ kind: Application
 metadata:
   name: traefik-dashboard
   namespace: argocd
+  annotations:
+    # Moving to homelab-private (homelab-private-apps); keep Flux from
+    # deleting the object when it leaves this kustomization.
+    kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
   project: default
   source:

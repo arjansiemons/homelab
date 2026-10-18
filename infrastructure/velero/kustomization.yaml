@@ -13,7 +13,6 @@ resources:
   - snapshot-crd-volumesnapshots.yaml
   - snapshot-controller-rbac.yaml
   - snapshot-controller.yaml
-  - volume-snapshot-class.yaml
 
 labels:
   - includeSelectors: false

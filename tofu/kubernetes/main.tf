@@ -117,16 +117,3 @@ module "keyvault_k8s_integration" {
     # Add other secret names as needed
   ]
 }
-
-module "proxmox_csi_plugin" {
-  depends_on = [module.talos]
-  source     = "./bootstrap/proxmox-csi-plugin"
-
-  providers = {
-    proxmox    = proxmox
-    kubernetes = kubernetes
-  }
-
-  proxmox = var.proxmox
-}
-

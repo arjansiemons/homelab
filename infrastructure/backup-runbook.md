@@ -58,7 +58,7 @@ Expected:
 - HelmRelease Ready
 - velero deployment and node-agent running
 - schedules present: pvc-full-daily, pvc-full-weekly-archive
-- VolumeSnapshotClass proxmox-csi-snapclass exists
+- no VolumeSnapshotClass is expected; PVCs are backed up via file-system backup (kopia)
 
 ## 6. Verify CNPG backup config
 

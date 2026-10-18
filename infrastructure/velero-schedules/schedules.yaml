@@ -16,6 +16,9 @@ spec:
     # snapshot attempts on unmounted PVCs can only fail.
     snapshotVolumes: false
     defaultVolumesToFsBackup: true
+    resourcePolicy:
+      kind: configmap
+      name: velero-volume-policy
     includeClusterResources: true
 ---
 apiVersion: velero.io/v1
@@ -36,4 +39,7 @@ spec:
     # snapshot attempts on unmounted PVCs can only fail.
     snapshotVolumes: false
     defaultVolumesToFsBackup: true
+    resourcePolicy:
+      kind: configmap
+      name: velero-volume-policy
     includeClusterResources: true

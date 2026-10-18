@@ -329,32 +329,6 @@ spec:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: goldilocks-proxmox-csi-plugin-controller
-  namespace: csi-proxmox
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: proxmox-csi-plugin-controller
-  updatePolicy:
-    updateMode: "InPlaceOrRecreate"
----
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
-  name: goldilocks-proxmox-csi-plugin-node
-  namespace: csi-proxmox
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: DaemonSet
-    name: proxmox-csi-plugin-node
-  updatePolicy:
-    updateMode: "InPlaceOrRecreate"
----
-apiVersion: autoscaling.k8s.io/v1
-kind: VerticalPodAutoscaler
-metadata:
   name: goldilocks-reflector
   namespace: default
 spec:

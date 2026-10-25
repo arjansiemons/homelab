@@ -136,6 +136,12 @@ spec:
           envoy: [NET_ADMIN, PERFMON, BPF]
     hubble:
       enabled: true
+      tls:
+        auto:
+          # The default "helm" method only issues certs on helm upgrade, so they
+          # silently expired after 365 days. certgen renews them every 4 months.
+          method: cronJob
+          schedule: "0 0 1 */4 *"
       relay:
         enabled: true
         rollOutPods: true

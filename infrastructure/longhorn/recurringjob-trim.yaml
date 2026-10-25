@@ -1,0 +1,14 @@
+apiVersion: longhorn.io/v1beta2
+kind: RecurringJob
+metadata:
+  name: filesystem-trim-weekly
+  namespace: longhorn-system
+spec:
+  # Reclaim blocks freed inside volumes so actualSize (and rebuild size)
+  # tracks real usage. Runs midweek, away from the CNPG/Velero backup window.
+  task: filesystem-trim
+  cron: "0 5 * * 3"
+  groups:
+    - default
+  concurrency: 1
+  retain: 0

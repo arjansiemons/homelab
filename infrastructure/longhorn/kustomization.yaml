@@ -6,3 +6,4 @@ resources:
   - helmrepo.yaml
   - helmrelease.yaml
   - ingress.yaml
+  - recurringjob-trim.yaml
